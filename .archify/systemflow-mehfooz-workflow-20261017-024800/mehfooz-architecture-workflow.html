@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mehfooz AI (محفوظ) — Complete System Flow & Architecture Map</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-border: #1f2937;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.35);
+      --secondary: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --danger: #ef4444;
+      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-border: #e2e8f0;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --primary: #059669;
+      --primary-glow: rgba(5, 150, 105, 0.2);
+      --secondary: #0891b2;
+      --accent-purple: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --danger: #dc2626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    button.btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--surface-border);
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.375rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    button.btn:hover {
+      background: var(--surface-border);
+      border-color: var(--primary);
+    }
+    button.btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    button.btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    nav.tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-border);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      background: var(--surface-border);
+    }
+    .tab-btn.active {
+      color: #ffffff;
+      background: var(--primary);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .view-panel {
+      display: none;
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .view-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .diagram-container {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Grid of architecture cards */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .module-card.active-card {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card-body {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .card-files {
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--surface-border);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--secondary);
+    }
+
+    /* Interactive SVG diagram styles */
+    svg.arch-canvas {
+      width: 100%;
+      height: auto;
+      min-height: 520px;
+      display: block;
+      user-select: none;
+    }
+    .node-group {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .node-group:hover rect {
+      stroke: var(--primary);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 8px var(--primary-glow));
+    }
+    .flow-line {
+      stroke-dasharray: 6;
+      animation: dash 30s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+
+    /* Inspector modal/drawer */
+    #inspector {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 380px;
+      max-width: calc(100vw - 4rem);
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+      animation: slideUp 0.25s ease forwards;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    #inspector .close-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    #inspector-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    #inspector-desc {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    #inspector-details {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.2);
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      font-family: var(--font-mono);
+      word-break: break-all;
+    }
+
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <div>
+        <h1 style="font-size: 1.15rem; font-weight: 700; line-height: 1.2;">MEHFOOZ AI (محفوظ)</h1>
+        <p style="font-size: 0.75rem; color: var(--text-muted);">The Serene Shield • System Flow & Runtime Architecture</p>
+      </div>
+      <span class="badge">Archify Certified v3.1</span>
+      <span class="badge badge-danger">High Threat Resistance</span>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="toggleTheme()">🌓 Theme</button>
+      <button class="btn" onclick="toggleFlowAnimation()">⚡ Toggle Motion</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Export PDF</button>
+    </div>
+  </header>
+
+  <nav class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('system-topology')">1. System Topology & Layers</button>
+    <button class="tab-btn" onclick="switchTab('request-lifecycle')">2. End-to-End Request Lifecycle</button>
+    <button class="tab-btn" onclick="switchTab('ai-rag-pipeline')">3. AI Legal Advisor & Hybrid RAG</button>
+    <button class="tab-btn" onclick="switchTab('zk-vault')">4. Zero-Knowledge Cryptographic Vault</button>
+    <button class="tab-btn" onclick="switchTab('checkin-sos')">5. Silent Check-In & Automated SOS</button>
+    <button class="tab-btn" onclick="switchTab('complaint-routing')">6. Legal Complaint & Agency Dispatch</button>
+  </nav>
+
+  <main>
+
+    <!-- PANEL 1: SYSTEM TOPOLOGY -->
+    <div id="system-topology" class="view-panel active">
+      <div class="section-title">
+        <span>🌐 Global System Topology & Security Boundaries</span>
+      </div>
+      <p class="section-desc">
+        Complete high-level architectural map showing client-side security perimeters, zero-knowledge storage, Express API gateway, and model fallback chains. Click any node to inspect implementation details.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 580" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#059669" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#0891b2" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#be123c" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#b45309" stop-opacity="0.9"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+            </marker>
+            <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4"/>
+            </marker>
+            <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e"/>
+            </marker>
+          </defs>
+
+          <!-- BOUNDARY: CLIENT BROWSER SANDBOX -->
+          <rect x="30" y="30" width="350" height="520" rx="12" fill="rgba(17, 24, 39, 0.4)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="45" y="55" fill="#10b981" font-weight="700" font-size="13" letter-spacing="1">CLIENT BROWSER (ZERO-KNOWLEDGE REALM)</text>
+
+          <!-- Node: Stealth Weather Cover -->
+          <g class="node-group" onclick="inspectNode('Stealth Weather Cover', 'WeatherCover.tsx provides an authentic, functional weather dashboard (Lahore, Karachi, Islamabad) with live or cached weather APIs. Entering the secret PIN or double-tapping the weather icon unmasks the safety suite.', 'src/components/WeatherCover.tsx')">
+            <rect x="50" y="80" width="310" height="70" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1"/>
+            <text x="70" y="110" fill="#fff" font-weight="600" font-size="14">🎭 Stealth Weather Disguise</text>
+            <text x="70" y="130" fill="rgba(255,255,255,0.8)" font-size="11">Real-time Weather Cover + Hidden PIN Unlock</text>
+          </g>
+
+          <!-- Node: React App Shell & Navigation -->
+          <g class="node-group" onclick="inspectNode('App Shell & Router', 'App.tsx controls unmasked routing: Legal Assistant, Incident Vault, Complaint Builder, Safe Corridor, and Emergency Check-In. Implements Panic Switch on Escape key or logo click.', 'src/App.tsx, src/components/Navigation.tsx')">
+            <rect x="50" y="170" width="310" height="75" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1"/>
+            <text x="70" y="200" fill="#fff" font-weight="600" font-size="14">🛡️ App Shell & Panic Router</text>
+            <text x="70" y="222" fill="rgba(255,255,255,0.8)" font-size="11">Tab Navigation • Quick Exit • Auth Context</text>
+          </g>
+
+          <!-- Node: Web Crypto Vault -->
+          <g class="node-group" onclick="inspectNode('Web Crypto Vault', 'AES-GCM-256 with PBKDF2 (100k iterations). Derives cryptographic keys locally from user passphrase. Plaintext evidence, audio, and photos are never transmitted.', 'src/utils/crypto.ts')">
+            <rect x="50" y="265" width="310" height="75" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1"/>
+            <text x="70" y="295" fill="#fff" font-weight="600" font-size="14">🔐 Web Crypto Engine (AES-256)</text>
+            <text x="70" y="318" fill="rgba(255,255,255,0.8)" font-size="11">PBKDF2 Key Derivation • Local Encrypt/Decrypt</text>
+          </g>
+
+          <!-- Node: Local Data Storage Mirror -->
+          <g class="node-group" onclick="inspectNode('Local Storage & Offline Cache', 'Air-gapped data persistence. Caches legal statutes, emergency contacts, safe havens, and encrypted vault entries for full offline resilience.', 'src/utils/dataService.ts, src/utils/offlineEmergencyCache.ts')">
+            <rect x="50" y="360" width="310" height="75" rx="8" fill="url(#amberGrad)" stroke="#fcd34d" stroke-width="1"/>
+            <text x="70" y="390" fill="#fff" font-weight="600" font-size="14">💾 Local Storage Mirror</text>
+            <text x="70" y="412" fill="rgba(255,255,255,0.8)" font-size="11">Offline Emergency Cache • Air-Gapped Profiles</text>
+          </g>
+
+          <!-- Node: Device Sensors -->
+          <g class="node-group" onclick="inspectNode('Browser Web APIs', 'Integrates Web Speech API (speech-to-text / text-to-speech) and Geolocation API with reverse geocoding for safe routing.', 'Web Speech API, Geolocation API')">
+            <rect x="50" y="455" width="310" height="75" rx="8" fill="rgba(31, 41, 55, 0.85)" stroke="#6b7280" stroke-width="1"/>
+            <text x="70" y="485" fill="#fff" font-weight="600" font-size="13">🎙️ Browser APIs (Voice & Geolocation)</text>
+            <text x="70" y="507" fill="#9ca3af" font-size="11">SpeechRecognition • SpeechSynthesis • GPS</text>
+          </g>
+
+          <!-- BOUNDARY: EXPRESS SERVER BACKEND -->
+          <rect x="420" y="30" width="330" height="520" rx="12" fill="rgba(17, 24, 39, 0.4)" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="435" y="55" fill="#06b6d4" font-weight="700" font-size="13" letter-spacing="1">EXPRESS BACKEND GATEWAY (PORT 3000)</text>
+
+          <!-- Node: Security & Rate Limiting -->
+          <g class="node-group" onclick="inspectNode('Security & Rate Limiting', 'Enforces Helmet CSP, XSS protection, input sanitization (null byte stripping), and tiered rate limits (120 req/15min API, 30 req/5min AI).', 'server.ts (Lines 43-130)')">
+            <rect x="440" y="80" width="290" height="75" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1"/>
+            <text x="460" y="110" fill="#fff" font-weight="600" font-size="14">🛡️ Security Gateway & Rate Limits</text>
+            <text x="460" y="132" fill="rgba(255,255,255,0.8)" font-size="11">Helmet CSP • Sanitizer • Abuse Prevention</text>
+          </g>
+
+          <!-- Node: AI Legal Orchestrator -->
+          <g class="node-group" onclick="inspectNode('AI Orchestrator', 'Handles /api/orchestrate. Classifies intent, detects immediate danger, queries hybrid retriever, and drives Gemini generation.', 'server.ts (Lines 227-406)')">
+            <rect x="440" y="175" width="290" height="80" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1"/>
+            <text x="460" y="205" fill="#fff" font-weight="600" font-size="14">🧠 Legal Orchestration Router</text>
+            <text x="460" y="225" fill="rgba(255,255,255,0.8)" font-size="11">POST /api/orchestrate • Intent & Danger Checks</text>
+            <text x="460" y="242" fill="rgba(255,255,255,0.7)" font-size="10">Auto-routes to Emergency if Risk Detected</text>
+          </g>
+
+          <!-- Node: Hybrid Retriever -->
+          <g class="node-group" onclick="inspectNode('Hybrid Retriever', 'Indexes Pakistan legal statutes (PPC, PECA, Domestic Violence, Workplace Harassment). Runs vector cosine similarity and keyword BM25 scoring.', 'src/utils/hybridRetriever.ts')">
+            <rect x="440" y="275" width="290" height="75" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1"/>
+            <text x="460" y="305" fill="#fff" font-weight="600" font-size="14">📚 Hybrid RAG Retriever</text>
+            <text x="460" y="327" fill="rgba(255,255,255,0.8)" font-size="11">Text Embeddings + Keyword Matching</text>
+          </g>
+
+          <!-- Node: Check-In & SOS Engine -->
+          <g class="node-group" onclick="inspectNode('Dead-Mans SOS Engine', 'Background timer tracking active journeys. If user does not check in before expiration, triggers automated dispatch via SMS and Email.', 'server/checkIns.js, server/sms.js, server/email.js')">
+            <rect x="440" y="370" width="290" height="75" rx="8" fill="url(#roseGrad)" stroke="#fb7185" stroke-width="1"/>
+            <text x="460" y="400" fill="#fff" font-weight="600" font-size="14">🚨 Dead-Man Timer & SOS Engine</text>
+            <text x="460" y="422" fill="rgba(255,255,255,0.8)" font-size="11">Automated Journey Heartbeat • Expiry Alert</text>
+          </g>
+
+          <!-- Node: Agency Dispatch & Routing -->
+          <g class="node-group" onclick="inspectNode('Agency Routing & Email', 'Routes complaints to FIA Cyber Crime Wing, Punjab Police 15, PCSW 1043, or Workplace Ombudsperson via Resend Email and official endpoints.', 'server/departmentRouting.js, server/email.js')">
+            <rect x="440" y="465" width="290" height="65" rx="8" fill="rgba(31, 41, 55, 0.85)" stroke="#6b7280" stroke-width="1"/>
+            <text x="460" y="492" fill="#fff" font-weight="600" font-size="13">📬 Agency Routing & Dispatch</text>
+            <text x="460" y="512" fill="#9ca3af" font-size="11">FIA • Punjab Police • PCSW • FOSPAH</text>
+          </g>
+
+          <!-- BOUNDARY: EXTERNAL SERVICES & CLOUD -->
+          <rect x="785" y="30" width="285" height="520" rx="12" fill="rgba(17, 24, 39, 0.4)" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="800" y="55" fill="#8b5cf6" font-weight="700" font-size="13" letter-spacing="1">EXTERNAL PROVIDERS & CLOUD</text>
+
+          <!-- Node: Google Gemini API Fallback Chain -->
+          <g class="node-group" onclick="inspectNode('Google Gemini LLM Chain', 'Hierarchical fallback: gemini-2.5-flash -> gemini-1.5-flash -> gemini-1.5-pro -> Local Deterministic Engine. Returns structured JSON with citations.', '@google/genai SDK')">
+            <rect x="805" y="130" width="245" height="95" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1"/>
+            <text x="820" y="158" fill="#fff" font-weight="600" font-size="13">✨ Google Gemini 2.5 Flash</text>
+            <text x="820" y="178" fill="rgba(255,255,255,0.8)" font-size="10">Fallback: gemini-1.5-flash</text>
+            <text x="820" y="194" fill="rgba(255,255,255,0.8)" font-size="10">Fallback: gemini-1.5-pro</text>
+            <text x="820" y="210" fill="rgba(255,255,255,0.9)" font-size="10" font-weight="600">Local Rule-Engine if Offline</text>
+          </g>
+
+          <!-- Node: Supabase Cloud -->
+          <g class="node-group" onclick="inspectNode('Supabase Cloud Sync', 'Stores user authentication (JWT), user profile metadata, and ciphertext vault records. Never receives plain text or unencrypted keys.', 'server/supabaseServer.js, src/utils/supabase.ts')">
+            <rect x="805" y="250" width="245" height="80" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1"/>
+            <text x="820" y="280" fill="#fff" font-weight="600" font-size="13">⚡ Supabase Auth & Cloud DB</text>
+            <text x="820" y="302" fill="rgba(255,255,255,0.8)" font-size="10">Ciphertext Sync Only • RLS Protected</text>
+          </g>
+
+          <!-- Node: Twilio & Resend -->
+          <g class="node-group" onclick="inspectNode('Twilio & Resend Dispatch', 'Twilio SMS triggers immediate mobile alerts to emergency contacts. Resend delivers formal complaint dossiers and verification emails.', 'Twilio SMS API, Resend Email API')">
+            <rect x="805" y="355" width="245" height="80" rx="8" fill="url(#roseGrad)" stroke="#fb7185" stroke-width="1"/>
+            <text x="820" y="385" fill="#fff" font-weight="600" font-size="13">📡 Twilio SMS & Resend Email</text>
+            <text x="820" y="407" fill="rgba(255,255,255,0.8)" font-size="10">SOS Text Broadcasts • PDF Complaints</text>
+          </g>
+
+          <!-- Node: OpenStreetMap & Nominatim -->
+          <g class="node-group" onclick="inspectNode('OpenStreetMap / Leaflet', 'Renders safe corridor navigation using Carto basemaps, OpenStreetMap tiles, and client-side Nominatim reverse geocoding.', 'Leaflet 1.9, CartoDB Basemaps')">
+            <rect x="805" y="460" width="245" height="70" rx="8" fill="rgba(31, 41, 55, 0.85)" stroke="#6b7280" stroke-width="1"/>
+            <text x="820" y="488" fill="#fff" font-weight="600" font-size="12">🗺️ OpenStreetMap & Carto Tiles</text>
+            <text x="820" y="508" fill="#9ca3af" font-size="10">Safe Havens • Geo-routing</text>
+          </g>
+
+          <!-- FLOW LINES -->
+          <!-- Client to Server -->
+          <path id="flow-client-server" class="flow-line" d="M 360 215 L 440 215" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+          <!-- Server to Gemini -->
+          <path class="flow-line" d="M 730 215 L 805 175" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+          <!-- Server to Retriever -->
+          <path class="flow-line" d="M 585 255 L 585 275" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <!-- Client Vault to Supabase -->
+          <path class="flow-line" d="M 360 300 Q 580 320 805 290" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+          <!-- Check-in to Twilio -->
+          <path class="flow-line" d="M 730 405 L 805 395" fill="none" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrow-rose)"/>
+        </svg>
+      </div>
+
+      <div class="module-grid">
+        <div class="module-card" onclick="inspectNode('Stealth Disguise Architecture', 'Provides plausible deniability. App appears as a fully functional Weather app. Under duress, a fake PIN unlocks a benign dummy profile.', 'src/components/WeatherCover.tsx')">
+          <div class="card-tag">Plausible Deniability</div>
+          <div class="card-title">1. Stealth Weather Cover</div>
+          <div class="card-body">Disguises the entire application as a live weather forecast. Protects against invasive inspections by perpetrators. Unlocks via invisible PIN keypad or secret temperature tap gesture.</div>
+          <div class="card-files">WeatherCover.tsx • App.tsx</div>
+        </div>
+
+        <div class="module-card" onclick="inspectNode('Grounded Legal RAG', 'Combines Pakistani statutory databases (PPC, PECA, Workplace Harassment 2010/2022) with local vector embeddings and Gemini 2.5 Flash for grounded, legally sound guidance.', 'src/utils/orchestrator.ts')">
+          <div class="card-tag">AI Intelligence</div>
+          <div class="card-title">2. Grounded Legal Advisor</div>
+          <div class="card-body">Answers in Urdu, English, and Roman Urdu. Extracts relevant statutory provisions, procedural steps, and evidentiary checklists without hallucinations.</div>
+          <div class="card-files">LegalAssistant.tsx • orchestrator.ts • server.ts</div>
+        </div>
+
+        <div class="module-card" onclick="inspectNode('Zero-Knowledge Cryptography', 'Client-side Web Crypto API ensures keys and plaintext stay strictly on the user’s device. Supabase receives AES-GCM ciphertexts with salted hashes.', 'src/utils/crypto.ts')">
+          <div class="card-tag">Cryptographic Security</div>
+          <div class="card-title">3. Zero-Knowledge Incident Vault</div>
+          <div class="card-body">Locks audio recordings, photographic evidence, and written logs with client-derived AES-256-GCM encryption. Tamper-evident and court-admissible.</div>
+          <div class="card-files">IncidentVault.tsx • crypto.ts • dataService.ts</div>
+        </div>
+
+        <div class="module-card" onclick="inspectNode('Automated SOS & Dead-Mans Timer', 'Monitors user travel in risky areas. If check-in timer reaches zero without user confirmation, the server automatically alerts emergency contacts.', 'server/checkIns.js')">
+          <div class="card-tag">Life Safety</div>
+          <div class="card-title">4. Silent Check-In & SOS Engine</div>
+          <div class="card-body">Configurable dead-man timer with grace periods. Automated GPS location dispatch over Twilio SMS and Resend Email to trusted emergency circles.</div>
+          <div class="card-files">SilentCheckIn.tsx • server/checkIns.js • sms.js</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: REQUEST LIFECYCLE -->
+    <div id="request-lifecycle" class="view-panel">
+      <div class="section-title">
+        <span>🔄 End-to-End Request & Orchestration Lifecycle</span>
+      </div>
+      <p class="section-desc">
+        Visual trace of a user inquiry through intent classification, danger checks, local vs. cloud fallback, and response rendering.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
+          <!-- Step 1: User Input -->
+          <g class="node-group" onclick="inspectNode('User Input Processing', 'User speaks or types in English, Urdu, or Roman Urdu. Audio is transcribed via Web Speech API in browser.', 'LegalAssistant.tsx')">
+            <rect x="50" y="80" width="180" height="90" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="75" y="115" fill="#fff" font-weight="600" font-size="13">1. Query Ingestion</text>
+            <text x="75" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Text or Voice Input</text>
+            <text x="75" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Urdu / English / Roman</text>
+          </g>
+
+          <line x1="230" y1="125" x2="300" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Step 2: Danger Evaluation -->
+          <g class="node-group" onclick="inspectNode('Danger Short-Circuit', 'orchestrator.ts evaluates risk keywords (e.g. gun, trapped, attacked, bleeding). If critical, halts LLM call and presents 15/1043 emergency buttons.', 'orchestrator.ts (Lines 37-76)')">
+            <polygon points="360,80 430,125 360,170 290,125" fill="url(#roseGrad)" stroke="#fb7185" stroke-width="1.5"/>
+            <text x="325" y="122" fill="#fff" font-weight="700" font-size="11">Immediate</text>
+            <text x="330" y="137" fill="#fff" font-weight="700" font-size="11">Danger?</text>
+          </g>
+
+          <!-- Branch Danger -> Panic UI -->
+          <line x1="360" y1="170" x2="360" y2="260" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrow-rose)"/>
+          <g class="node-group" onclick="inspectNode('Emergency Panic Action', 'Instantaneous modal showing 15 (Police), 1043 (Women Helpline), 1122 (Ambulance), and 1-tap SOS text broadcast to emergency contacts.', 'CrisisModal.tsx')">
+            <rect x="270" y="260" width="180" height="85" rx="8" fill="url(#roseGrad)" stroke="#fb7185" stroke-width="1.5"/>
+            <text x="290" y="295" fill="#fff" font-weight="700" font-size="13">🚨 Crisis Short-Circuit</text>
+            <text x="290" y="315" fill="rgba(255,255,255,0.85)" font-size="11">Bypass AI • Instant 15/1043</text>
+            <text x="290" y="332" fill="rgba(255,255,255,0.7)" font-size="10">Twilio SOS SMS Triggered</text>
+          </g>
+
+          <!-- Branch Safe -> Server Query -->
+          <line x1="430" y1="125" x2="510" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Step 3: Express Orchestrate -->
+          <g class="node-group" onclick="inspectNode('/api/orchestrate Endpoint', 'Express applies rate limiting (30 req/5min) and executes hybridRetriever to retrieve relevant legal citations.', 'server.ts (Lines 227-406)')">
+            <rect x="510" y="80" width="190" height="90" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="530" y="115" fill="#fff" font-weight="600" font-size="13">2. Express Gateway</text>
+            <text x="530" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Sanitize & Rate Limit</text>
+            <text x="530" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Hybrid Search Citations</text>
+          </g>
+
+          <line x1="700" y1="125" x2="770" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Step 4: Model Cascade -->
+          <g class="node-group" onclick="inspectNode('Gemini Cascade Execution', 'Calls Gemini 2.5 Flash with structured prompt. Automatically falls back to 1.5-flash or 1.5-pro upon network or quota failure.', 'server.ts')">
+            <rect x="770" y="80" width="230" height="90" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="790" y="112" fill="#fff" font-weight="600" font-size="13">3. Gemini Model Cascade</text>
+            <text x="790" y="132" fill="rgba(255,255,255,0.8)" font-size="11">Primary: gemini-2.5-flash</text>
+            <text x="790" y="148" fill="rgba(255,255,255,0.7)" font-size="10">Fallback: 1.5-flash • 1.5-pro</text>
+            <text x="790" y="163" fill="rgba(255,255,255,0.7)" font-size="10">Deterministic Fallback if Offline</text>
+          </g>
+
+          <!-- Step 5: Structured Response Return -->
+          <path d="M 885 170 L 885 300 L 590 300" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <g class="node-group" onclick="inspectNode('Structured Response Delivery', 'Client receives structured LegalQueryResponse containing: answerSummary, applicableLaws (PPC/PECA), actionableSteps, and supportOptions.', 'LegalAssistant.tsx')">
+            <rect x="440" y="260" width="200" height="85" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="460" y="292" fill="#fff" font-weight="600" font-size="13">4. Client Presentation</text>
+            <text x="460" y="312" fill="rgba(255,255,255,0.8)" font-size="11">Citations + Action Steps</text>
+            <text x="460" y="330" fill="rgba(255,255,255,0.7)" font-size="10">1-Tap Complaint Builder Handoff</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- PANEL 3: AI RAG PIPELINE -->
+    <div id="ai-rag-pipeline" class="view-panel">
+      <div class="section-title">
+        <span>🧠 Dual-Mode Grounded RAG & Statutory Citation Engine</span>
+      </div>
+      <p class="section-desc">
+        How Mehfooz grounds every legal recommendation against Pakistani statutory law, preventing hallucinations and ensuring evidentiary validity.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg">
+          <!-- Legal Corpus Store -->
+          <g class="node-group" onclick="inspectNode('Pakistan Legal Statutes Corpus', 'Pre-compiled corpus: Pakistan Penal Code (PPC 509, 354, 376), PECA 2016 (Sec 20, 21, 24 Cyber Harassment), Punjab Protection of Women Against Violence Act 2016, and Protection Against Harassment at Workplace Act 2010/2022.', 'src/utils/hybridRetriever.ts')">
+            <rect x="60" y="60" width="260" height="130" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="80" y="95" fill="#fff" font-weight="700" font-size="14">📜 Pakistan Legal Corpus</text>
+            <text x="80" y="120" fill="rgba(255,255,255,0.85)" font-size="11">• PPC Sections 509, 354, 376</text>
+            <text x="80" y="140" fill="rgba(255,255,255,0.85)" font-size="11">• PECA 2016 (Cyber Stalking/Blackmail)</text>
+            <text x="80" y="160" fill="rgba(255,255,255,0.85)" font-size="11">• Workplace Harassment Acts 2010/2022</text>
+          </g>
+
+          <line x1="320" y1="125" x2="400" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Embeddings Cache -->
+          <g class="node-group" onclick="inspectNode('Pre-computed Embeddings Cache', 'Pre-computed vector embeddings stored in .embeddings_cache.json with 768-dimensional text vectors. Avoids cold-start embedding generation latency.', '.embeddings_cache.json')">
+            <rect x="400" y="60" width="230" height="130" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="420" y="95" fill="#fff" font-weight="700" font-size="14">⚡ Vector Embedding Cache</text>
+            <text x="420" y="120" fill="rgba(255,255,255,0.85)" font-size="11">• 768-dim Pre-indexed Vectors</text>
+            <text x="420" y="140" fill="rgba(255,255,255,0.85)" font-size="11">• Cosine Similarity Scoring</text>
+            <text x="420" y="160" fill="rgba(255,255,255,0.85)" font-size="11">• Zero Cold-Start Latency</text>
+          </g>
+
+          <line x1="630" y1="125" x2="710" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Hybrid Search Ranker -->
+          <g class="node-group" onclick="inspectNode('Hybrid Search & Rank Fusion', 'Executes parallel vector similarity and BM25 token matching. Normalizes and combines scores to pick top 3-5 authoritative legal sections.', 'src/utils/hybridRetriever.ts')">
+            <rect x="710" y="60" width="280" height="130" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="730" y="95" fill="#fff" font-weight="700" font-size="14">⚖️ Reciprocal Rank Fusion</text>
+            <text x="730" y="120" fill="rgba(255,255,255,0.85)" font-size="11">• Vector Similarity + Token BM25</text>
+            <text x="730" y="140" fill="rgba(255,255,255,0.85)" font-size="11">• Threshold Filtering & Re-ranking</text>
+            <text x="730" y="160" fill="rgba(255,255,255,0.85)" font-size="11">• Injects Statutory Citations into Prompt</text>
+          </g>
+
+          <!-- Prompt Injection into Gemini -->
+          <path d="M 850 190 L 850 270 L 580 270" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <g class="node-group" onclick="inspectNode('Grounded System Prompt Synthesis', 'Combines user question, client context (location, emergency contacts), and retrieved legal provisions into a grounded instruction set for Gemini.', 'server.ts')">
+            <rect x="250" y="240" width="330" height="100" rx="8" fill="url(#amberGrad)" stroke="#fcd34d" stroke-width="1.5"/>
+            <text x="270" y="275" fill="#fff" font-weight="700" font-size="13">📝 Grounded System Prompt Synthesis</text>
+            <text x="270" y="297" fill="rgba(255,255,255,0.9)" font-size="11">Enforces Pakistani Jurisdiction Only</text>
+            <text x="270" y="315" fill="rgba(255,255,255,0.8)" font-size="10">Prohibits Unsupported Claims • Empathy First</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- PANEL 4: ZERO KNOWLEDGE VAULT -->
+    <div id="zk-vault" class="view-panel">
+      <div class="section-title">
+        <span>🔐 Zero-Knowledge Cryptographic Vault (AES-GCM-256)</span>
+      </div>
+      <p class="section-desc">
+        How Mehfooz protects sensitive incident records, photos, and voice notes. Plaintext never touches the network or server unencrypted.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg">
+          <!-- Input Plaintext -->
+          <g class="node-group" onclick="inspectNode('Plaintext Evidence Intake', 'Incident description, audio recordings, photo timestamps, and perpetrator details captured entirely in client memory.', 'src/components/IncidentVault.tsx')">
+            <rect x="50" y="80" width="200" height="90" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="70" y="115" fill="#fff" font-weight="600" font-size="13">Raw Evidence Entry</text>
+            <text x="70" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Audio • Photos • Log</text>
+            <text x="70" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Stored only in RAM</text>
+          </g>
+
+          <line x1="250" y1="125" x2="330" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- PBKDF2 & AES-GCM -->
+          <g class="node-group" onclick="inspectNode('PBKDF2 & AES-256-GCM', 'Derives symmetric key via 100,000 PBKDF2 iterations using user passphrase and random 16-byte salt. Encrypts payload with 12-byte IV using AES-GCM-256.', 'src/utils/crypto.ts')">
+            <rect x="330" y="70" width="280" height="110" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="350" y="105" fill="#fff" font-weight="700" font-size="14">Web Crypto Subsystem</text>
+            <text x="350" y="127" fill="rgba(255,255,255,0.85)" font-size="11">• PBKDF2 (100k iters, SHA-256)</text>
+            <text x="350" y="145" fill="rgba(255,255,255,0.85)" font-size="11">• AES-GCM-256 Encryption</text>
+            <text x="350" y="163" fill="rgba(255,255,255,0.85)" font-size="11">• Produces Ciphertext + Auth Tag</text>
+          </g>
+
+          <line x1="610" y1="125" x2="690" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Ciphertext Package -->
+          <g class="node-group" onclick="inspectNode('Ciphertext Envelope', 'Cryptographic envelope: { cipherText: base64, iv: base64, salt: base64, id: uuid }. Without the user passphrase, this payload is computationally irreversible.', 'src/utils/crypto.ts')">
+            <rect x="690" y="80" width="200" height="90" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="710" y="115" fill="#fff" font-weight="600" font-size="13">Ciphertext Envelope</text>
+            <text x="710" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Zero Plaintext</text>
+            <text x="710" y="152" fill="rgba(255,255,255,0.7)" font-size="10">IV + Salt + Ciphertext</text>
+          </g>
+
+          <!-- Dual Persistence -->
+          <path d="M 790 170 L 790 280 L 450 280" fill="none" stroke="#06b6d4" stroke-width="2.5" marker-end="url(#arrow-cyan)"/>
+          <path d="M 790 170 L 790 280 L 940 280" fill="none" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Local Mirror -->
+          <g class="node-group" onclick="inspectNode('Local Air-Gapped Mirror', 'Cached in browser localStorage for immediate offline access even with no internet connection.', 'src/utils/dataService.ts')">
+            <rect x="250" y="240" width="200" height="85" rx="8" fill="url(#amberGrad)" stroke="#fcd34d" stroke-width="1.5"/>
+            <text x="270" y="275" fill="#fff" font-weight="600" font-size="13">💾 Local Storage Mirror</text>
+            <text x="270" y="295" fill="rgba(255,255,255,0.85)" font-size="11">Air-Gapped Access</text>
+            <text x="270" y="312" fill="rgba(255,255,255,0.7)" font-size="10">Decrypted on the Fly in RAM</text>
+          </g>
+
+          <!-- Cloud Sync -->
+          <g class="node-group" onclick="inspectNode('Supabase Encrypted Storage', 'Supabase table vault_records holds only the ciphertext. Even database administrators cannot read user evidence.', 'server/supabaseServer.js')">
+            <rect x="850" y="240" width="200" height="85" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="870" y="275" fill="#fff" font-weight="600" font-size="13">⚡ Supabase Sync</text>
+            <text x="870" y="295" fill="rgba(255,255,255,0.85)" font-size="11">Cloud Backup</text>
+            <text x="870" y="312" fill="rgba(255,255,255,0.7)" font-size="10">Ciphertext Only (Zero-Knowledge)</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- PANEL 5: CHECK-IN & SOS -->
+    <div id="checkin-sos" class="view-panel">
+      <div class="section-title">
+        <span>⏱️ Silent Check-In Engine & Dead-Man's SOS Timer</span>
+      </div>
+      <p class="section-desc">
+        Runtime state machine managing safe journey monitoring, automated heartbeat alerts, and multi-channel emergency dispatch.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg">
+          <!-- State: Configured -->
+          <g class="node-group" onclick="inspectNode('Journey Initialization', 'User defines destination, duration (e.g. 30 mins), and periodic check-in intervals (e.g. every 10 mins). GPS location attached.', 'src/components/SilentCheckIn.tsx')">
+            <rect x="50" y="80" width="200" height="90" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="70" y="115" fill="#fff" font-weight="600" font-size="13">1. Journey Start</text>
+            <text x="70" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Set Destination & Timer</text>
+            <text x="70" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Coordinates Logged</text>
+          </g>
+
+          <line x1="250" y1="125" x2="330" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- State: Heartbeat Countdown -->
+          <g class="node-group" onclick="inspectNode('Active Heartbeat Loop', 'Continuous countdown on client and server. Client sends ping to keep timer alive. If battery dies or phone is snatched, server timer continues.', 'server/checkIns.js')">
+            <rect x="330" y="80" width="220" height="90" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="350" y="115" fill="#fff" font-weight="600" font-size="13">2. Active Heartbeat</text>
+            <text x="350" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Silent Interval Alerts</text>
+            <text x="350" y="152" fill="rgba(255,255,255,0.7)" font-size="10">User taps I am Safe</text>
+          </g>
+
+          <!-- Branch 1: Safe Confirmation -->
+          <path d="M 440 80 Q 440 20 330 20 Q 220 20 220 80" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="290" y="35" fill="#10b981" font-size="11" font-weight="600">Check-in confirmed (Timer Resets)</text>
+
+          <!-- Branch 2: Expiration & Grace Period -->
+          <line x1="550" y1="125" x2="630" y2="125" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrow-rose)"/>
+
+          <g class="node-group" onclick="inspectNode('Grace Period Warning', 'If timer hits zero with no ping, a 2-minute discreet vibration/grace period begins before full emergency trigger.', 'server/checkIns.js')">
+            <rect x="630" y="80" width="200" height="90" rx="8" fill="url(#amberGrad)" stroke="#fcd34d" stroke-width="1.5"/>
+            <text x="650" y="115" fill="#fff" font-weight="700" font-size="13">3. Grace Period</text>
+            <text x="650" y="135" fill="rgba(255,255,255,0.9)" font-size="11">2-Minute Countdown</text>
+            <text x="650" y="152" fill="rgba(255,255,255,0.8)" font-size="10">Discreet Alert to User</text>
+          </g>
+
+          <line x1="830" y1="125" x2="900" y2="125" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrow-rose)"/>
+
+          <!-- Emergency SOS Dispatch -->
+          <g class="node-group" onclick="inspectNode('Automated SOS Broadcast', 'Server triggers Twilio SMS and Resend Email to all emergency contacts with last-known GPS location and tracking URL.', 'server/sms.js, server/email.js')">
+            <rect x="900" y="70" width="180" height="110" rx="8" fill="url(#roseGrad)" stroke="#fb7185" stroke-width="1.5"/>
+            <text x="915" y="105" fill="#fff" font-weight="700" font-size="13">🚨 EMERGENCY SOS</text>
+            <text x="915" y="125" fill="rgba(255,255,255,0.85)" font-size="11">• Twilio SMS Dispatched</text>
+            <text x="915" y="143" fill="rgba(255,255,255,0.85)" font-size="11">• Resend Email Alert</text>
+            <text x="915" y="161" fill="rgba(255,255,255,0.85)" font-size="11">• Live GPS Location Link</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- PANEL 6: COMPLAINT BUILDER -->
+    <div id="complaint-routing" class="view-panel">
+      <div class="section-title">
+        <span>📄 Legal Complaint Builder & Department Dispatch Matrix</span>
+      </div>
+      <p class="section-desc">
+        Automated transformation of user traumatic accounts into formal, legally admissible complaint dossiers routed to official Pakistani government departments.
+      </p>
+
+      <div class="diagram-container">
+        <svg class="arch-canvas" viewBox="0 0 1100 460" xmlns="http://www.w3.org/2000/svg">
+          <!-- Step 1: Guided Questionnaire -->
+          <g class="node-group" onclick="inspectNode('Guided Step-by-Step Intake', 'Step-by-step wizard: Incident date/time, perpetrator identity, specific acts committed, evidence list, and requested remedies.', 'src/components/ComplaintBuilder.tsx')">
+            <rect x="50" y="80" width="220" height="90" rx="8" fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+            <text x="70" y="115" fill="#fff" font-weight="600" font-size="13">1. Guided Intake</text>
+            <text x="70" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Trauma-Informed Steps</text>
+            <text x="70" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Timeline & Evidence Mapping</text>
+          </g>
+
+          <line x1="270" y1="125" x2="350" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Step 2: Legal Narrative Rewriter -->
+          <g class="node-group" onclick="inspectNode('Formal Narrative Rewriter', 'POST /api/rewrite-narrative re-phrases colloquial descriptions into legally precise factual declarations citing specific PPC/PECA sections.', 'server.ts (Lines 808-910)')">
+            <rect x="350" y="80" width="240" height="90" rx="8" fill="url(#primaryGrad)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="370" y="115" fill="#fff" font-weight="600" font-size="13">2. Narrative Rewriter</text>
+            <text x="370" y="135" fill="rgba(255,255,255,0.8)" font-size="11">POST /api/rewrite-narrative</text>
+            <text x="370" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Translates into Court Standard</text>
+          </g>
+
+          <line x1="590" y1="125" x2="670" y2="125" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- Step 3: PDF Generation -->
+          <g class="node-group" onclick="inspectNode('Court-Admissible PDF Generator', 'Client-side jsPDF compiles formal document with tracking code, legal citations, evidence annexures, and verification hash.', 'src/utils/pdfExport.ts')">
+            <rect x="670" y="80" width="220" height="90" rx="8" fill="url(#purpleGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="690" y="115" fill="#fff" font-weight="600" font-size="13">3. Formal PDF Export</text>
+            <text x="690" y="135" fill="rgba(255,255,255,0.8)" font-size="11">Client-Side jsPDF Engine</text>
+            <text x="690" y="152" fill="rgba(255,255,255,0.7)" font-size="10">Official Seals & Verification Hash</text>
+          </g>
+
+          <!-- Branch to Government Departments -->
+          <path d="M 780 170 L 780 270" stroke="#06b6d4" stroke-width="2.5"/>
+          <path d="M 180 270 L 980 270" stroke="#06b6d4" stroke-width="2"/>
+
+          <!-- Agency 1: FIA NR3C -->
+          <line x1="180" y1="270" x2="180" y2="310" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <g class="node-group" onclick="inspectNode('FIA Cyber Crime Wing (NR3C)', 'Routes PECA 2016 violations (online blackmail, non-consensual image sharing, cyber harassment) directly to FIA inquiry desk.', 'server/departmentRouting.js')">
+            <rect x="80" y="310" width="200" height="85" rx="8" fill="rgba(17, 24, 39, 0.85)" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="100" y="342" fill="#fff" font-weight="600" font-size="13">FIA Cyber Crime (NR3C)</text>
+            <text x="100" y="362" fill="#9ca3af" font-size="11">PECA 2016 Cyber Stalking</text>
+            <text x="100" y="378" fill="#06b6d4" font-size="10">Helpdesk: 1991</text>
+          </g>
+
+          <!-- Agency 2: Punjab Police 15 -->
+          <line x1="440" y1="270" x2="440" y2="310" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <g class="node-group" onclick="inspectNode('Punjab Police & Khidmat Marakaz', 'Routes PPC criminal complaints (assault, stalking, domestic abuse) for FIR registration at local police station.', 'server/departmentRouting.js')">
+            <rect x="340" y="310" width="200" height="85" rx="8" fill="rgba(17, 24, 39, 0.85)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="360" y="342" fill="#fff" font-weight="600" font-size="13">Punjab Police (15)</text>
+            <text x="360" y="362" fill="#9ca3af" font-size="11">FIR & Physical Protection</text>
+            <text x="360" y="378" fill="#10b981" font-size="10">Khidmat Marakaz Desk</text>
+          </g>
+
+          <!-- Agency 3: PCSW 1043 -->
+          <line x1="700" y1="270" x2="700" y2="310" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <g class="node-group" onclick="inspectNode('Punjab Commission on the Status of Women', 'PCSW 1043 helpline provides institutional follow-up, legal aid lawyers, shelter placement, and monitoring.', 'server/departmentRouting.js')">
+            <rect x="600" y="310" width="200" height="85" rx="8" fill="rgba(17, 24, 39, 0.85)" stroke="#8b5cf6" stroke-width="1.5"/>
+            <text x="620" y="342" fill="#fff" font-weight="600" font-size="13">PCSW Women Helpline</text>
+            <text x="620" y="362" fill="#9ca3af" font-size="11">Institutional Monitoring</text>
+            <text x="620" y="378" fill="#8b5cf6" font-size="10">Toll Free: 1043</text>
+          </g>
+
+          <!-- Agency 4: FOSPAH Ombudsperson -->
+          <line x1="960" y1="270" x2="960" y2="310" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+          <g class="node-group" onclick="inspectNode('Federal / Provincial Ombudsperson', 'Direct jurisdiction over workplace harassment under 2010/2022 Act with statutory powers to summon employers and terminate offenders.', 'server/departmentRouting.js')">
+            <rect x="860" y="310" width="200" height="85" rx="8" fill="rgba(17, 24, 39, 0.85)" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="880" y="342" fill="#fff" font-weight="600" font-size="13">FOSPAH Ombudsperson</text>
+            <text x="880" y="362" fill="#9ca3af" font-size="11">Workplace Harassment Act</text>
+            <text x="880" y="378" fill="#f59e0b" font-size="10">Judicial Remedy</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- DETAIL INSPECTOR DRAWER -->
+  <div id="inspector">
+    <button class="close-btn" onclick="closeInspector()">&times;</button>
+    <div id="inspector-title">Node Details</div>
+    <div id="inspector-desc">Click any component to inspect implementation rules.</div>
+    <div id="inspector-details">Source file: -</div>
+  </div>
+
+  <footer>
+    Mehfooz AI Architecture & Workflow Visualizer • Generated via <strong>Archify</strong> • Certified Spec Compliance
+  </footer>
+
+  <script>
+    function switchTab(panelId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      const targetPanel = document.getElementById(panelId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+      event.currentTarget.classList.add('active');
+      closeInspector();
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      if (current === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }
+
+    let motionActive = true;
+    function toggleFlowAnimation() {
+      motionActive = !motionActive;
+      document.querySelectorAll('.flow-line').forEach(line => {
+        line.style.animationPlayState = motionActive ? 'running' : 'paused';
+      });
+    }
+
+    function inspectNode(title, description, sourceFile) {
+      const drawer = document.getElementById('inspector');
+      document.getElementById('inspector-title').innerText = title;
+      document.getElementById('inspector-desc').innerText = description;
+      document.getElementById('inspector-details').innerText = 'Source: ' + sourceFile;
+      drawer.style.display = 'block';
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

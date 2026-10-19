@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1362.7715 957.45" width="1362.7715" height="957.45" style="--bg:#FFFFFF;--fg:#3B3B3B;--line:#3B3B3B;--accent:#005FB8;--muted:#3B3B3BCC;--surface:#F8F8F8;--border:#3B3B3B;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" />
+  </marker>
+  <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="var(--_arrow)" stroke-width="1" />
+  </marker>
+</defs>
+<g class="block" data-type="alt" data-label="Active physical danger detected">
+  <rect x="166.58949999999996" y="293.45" width="326.488" height="60" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="166.58949999999996" y="293.45" width="205.08999999999997" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="172.58949999999996" y="302.45" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">alt [Active physical danger detected]</text>
+</g>
+<g class="block" data-type="rect" data-label="rgb(254, 242, 242)">
+  <rect x="166.58949999999996" y="195.45" width="326.488" height="158" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="166.58949999999996" y="195.45" width="141.07000000000002" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="172.58949999999996" y="204.45" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">rect [rgb(254, 242, 242)]</text>
+</g>
+<g class="block" data-type="rect" data-label="rgb(240, 249, 255)">
+  <rect x="350.2075" y="376.45" width="568.645" height="180.00000000000006" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="350.2075" y="376.45" width="141.07000000000002" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="356.2075" y="385.45" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">rect [rgb(240, 249, 255)]</text>
+</g>
+<g class="block" data-type="rect" data-label="rgb(245, 243, 255)">
+  <rect x="350.2075" y="579.45" width="768.565" height="100" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="350.2075" y="579.45" width="141.07000000000002" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="356.2075" y="588.45" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">rect [rgb(245, 243, 255)]</text>
+</g>
+<g class="block" data-type="opt" data-label="User clicks &quot;Draft Complaint&quot;">
+  <rect x="46.58949999999996" y="807.45" width="1286.182" height="100" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="46.58949999999996" y="807.45" width="187.92999999999998" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="52.58949999999996" y="816.45" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">opt [User clicks &quot;Draft Complaint&quot;]</text>
+</g>
+<line class="lifeline" data-actor="User" x1="96.58949999999996" y1="92.45" x2="96.58949999999996" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="UI" x1="248.39849999999996" y1="70" x2="248.39849999999996" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Orch" x1="421.6424999999999" y1="70" x2="421.6424999999999" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="RAG" x1="594.1455" y1="70" x2="594.1455" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="DB" x1="807.033" y1="70" x2="807.033" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="AI" x1="1028.8125" y1="70" x2="1028.8125" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Vault" x1="1235.7720000000002" y1="70" x2="1235.7720000000002" y2="927.45" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<g class="message" data-from="User" data-to="UI" data-label="Types or speaks: &quot;Someone is blackmailing me on WhatsApp&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="96.58949999999996" y1="112.45" x2="248.39849999999996" y2="112.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="172.49399999999997" y="102.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Types or speaks: &quot;Someone is blackmailing me on WhatsApp&quot;</text>
+</g>
+<g class="message" data-from="UI" data-to="Orch" data-label="processSafetyOrchestration(query, lang)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="248.39849999999996" y1="152.45" x2="421.6424999999999" y2="152.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="335.02049999999997" y="142.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">processSafetyOrchestration(query, lang)</text>
+</g>
+<g class="message" data-from="Orch" data-to="Orch" data-label="checkImmediateDanger(query)" data-line-style="solid" data-arrow-head="filled" data-self="true">
+  <polyline points="421.6424999999999,235.45 451.6424999999999,235.45 451.6424999999999,255.45 421.6424999999999,255.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="459.6424999999999" y="245.45" font-size="11" text-anchor="start" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">checkImmediateDanger(query)</text>
+</g>
+<g class="message" data-from="Orch" data-to="UI" data-label="Instantly surface Emergency SOS / 15 Banner" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="421.6424999999999" y1="333.45" x2="248.39849999999996" y2="333.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="335.02049999999997" y="323.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Instantly surface Emergency SOS / 15 Banner</text>
+</g>
+<g class="message" data-from="Orch" data-to="RAG" data-label="Retrieve relevant legal statutes" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="421.6424999999999" y1="416.45" x2="594.1455" y2="416.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="507.89399999999995" y="406.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Retrieve relevant legal statutes</text>
+</g>
+<g class="message" data-from="RAG" data-to="DB" data-label="Keyword + Vector Embedding Search" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="594.1455" y1="456.45" x2="807.033" y2="456.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="700.58925" y="446.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Keyword + Vector Embedding Search</text>
+</g>
+<g class="message" data-from="DB" data-to="RAG" data-label="Matches PECA 2016 (Sec 20/21) &amp; PPC 509" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="807.033" y1="496.45" x2="594.1455" y2="496.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="700.58925" y="486.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Matches PECA 2016 (Sec 20/21) &amp; PPC 509</text>
+</g>
+<g class="message" data-from="RAG" data-to="Orch" data-label="Formatted Legal Context + Citations" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="594.1455" y1="536.45" x2="421.6424999999999" y2="536.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="507.89399999999995" y="526.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Formatted Legal Context + Citations</text>
+</g>
+<g class="message" data-from="Orch" data-to="AI" data-label="Prompt: Persona + Legal Context + User Question" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="421.6424999999999" y1="619.45" x2="1028.8125" y2="619.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="725.2275" y="609.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Prompt: Persona + Legal Context + User Question</text>
+</g>
+<g class="message" data-from="AI" data-to="Orch" data-label="Structured response (Advice + Formal Citations + Action Plan)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1028.8125" y1="659.45" x2="421.6424999999999" y2="659.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="725.2275" y="649.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Structured response (Advice + Formal Citations + Action Plan)</text>
+</g>
+<g class="message" data-from="Orch" data-to="UI" data-label="Stream response + AgentStepsPanel reasoning" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="421.6424999999999" y1="699.45" x2="248.39849999999996" y2="699.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="335.02049999999997" y="689.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Stream response + AgentStepsPanel reasoning</text>
+</g>
+<g class="message" data-from="UI" data-to="User" data-label="Plain-language rights + law citations in English/Urdu" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="248.39849999999996" y1="739.45" x2="96.58949999999996" y2="739.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="172.49399999999997" y="729.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Plain-language rights + law citations in English/Urdu</text>
+</g>
+<g class="message" data-from="UI" data-to="User" data-label="Action Cards: [Draft Police Complaint] or [Save to Vault]" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="248.39849999999996" y1="779.45" x2="96.58949999999996" y2="779.45" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="172.49399999999997" y="769.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Action Cards: [Draft Police Complaint] or [Save to Vault]</text>
+</g>
+<g class="message" data-from="User" data-to="UI" data-label="Click action card" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="96.58949999999996" y1="847.45" x2="248.39849999999996" y2="847.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="172.49399999999997" y="837.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Click action card</text>
+</g>
+<g class="message" data-from="UI" data-to="Vault" data-label="Pre-fill ComplaintBuilder with facts and PECA sections" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="248.39849999999996" y1="887.45" x2="1235.7720000000002" y2="887.45" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="742.0852500000001" y="877.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Pre-fill ComplaintBuilder with facts and PECA sections</text>
+</g>
+<g class="note" data-position="over" data-actors="Orch">
+  <polygon points="354.16949999999997,160.45 483.1155,160.45 489.1155,166.45 489.1155,183.45 354.16949999999997,183.45" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="483.1155,160.45 489.1155,166.45 483.1155,166.45" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="421.6425" y="171.95" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Safety Threat Detection</text>
+</g>
+<g class="note" data-position="over" data-actors="Orch,DB">
+  <polygon points="548.64675,341.45 674.02875,341.45 680.02875,347.45 680.02875,364.45 548.64675,364.45" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="674.02875,341.45 680.02875,347.45 674.02875,347.45" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="614.33775" y="352.95" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hybrid Retrieval (RAG)</text>
+</g>
+<g class="note" data-position="over" data-actors="Orch,AI">
+  <polygon points="628.0545,544.45 816.4005,544.45 822.4005,550.45 822.4005,567.45 628.0545,567.45" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="816.4005,544.45 822.4005,550.45 816.4005,550.45" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="725.2275" y="555.95" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Agentic Reasoning &amp; Step Execution</text>
+</g>
+<g class="actor" data-id="User" data-label="User" data-type="actor">
+  <g transform="translate(78.58949999999996,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="96.58949999999996" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">User</text>
+</g>
+<g class="actor" data-id="UI" data-label="LegalAssistant.tsx" data-type="participant">
+  <rect x="176.58949999999996" y="30" width="143.618" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="248.39849999999996" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">LegalAssistant.tsx</text>
+</g>
+<g class="actor" data-id="Orch" data-label="orchestrator.ts" data-type="participant">
+  <rect x="360.2074999999999" y="30" width="122.87" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="421.6424999999999" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">orchestrator.ts</text>
+</g>
+<g class="actor" data-id="RAG" data-label="hybridRetriever.ts" data-type="participant">
+  <rect x="523.0775" y="30" width="142.13600000000002" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="594.1455" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">hybridRetriever.ts</text>
+</g>
+<g class="actor" data-id="DB" data-label="legalCorpus.ts (PPC &amp; PECA)" data-type="participant">
+  <rect x="705.2135000000001" y="30" width="203.63899999999998" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="807.033" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">legalCorpus.ts (PPC &amp; PECA)</text>
+</g>
+<g class="actor" data-id="AI" data-label="Gemini 2.5 Flash LLM" data-type="participant">
+  <rect x="948.8525" y="30" width="159.92" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1028.8125" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">Gemini 2.5 Flash LLM</text>
+</g>
+<g class="actor" data-id="Vault" data-label="IncidentVault / Complaint" data-type="participant">
+  <rect x="1148.7725000000003" y="30" width="173.99899999999997" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1235.7720000000002" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">IncidentVault / Complaint</text>
+</g>
+</svg>

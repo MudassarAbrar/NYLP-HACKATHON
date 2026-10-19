@@ -1,0 +1,40 @@
+{
+  "$schema": "https://archify.si/schemas/workflow.schema.json",
+  "meta": {
+    "title": "Mehfooz AI - Live Moving Workflow & Motion Simulator",
+    "slug": "mehfooz-animated-workflow",
+    "type": "workflow",
+    "quality_profile": "showcase",
+    "animation": "live-motion",
+    "output": ".archify/workflow-animated-flow-20261017-103500/mehfooz-animated-workflow.html",
+    "timestamp": "20261017-103500",
+    "description": "Interactive moving workflow simulation for Mehfooz AI: Path tracing with particles, live telemetry logging, and multi-scenario state machine."
+  },
+  "scenarios": [
+    {
+      "id": "legal-rag",
+      "label": "Grounded Legal Advisory (RAG + Gemini 2.5 Flash)",
+      "steps": ["node-weather", "node-shell", "node-gateway", "node-danger", "node-retriever", "node-gemini"]
+    },
+    {
+      "id": "emergency-panic",
+      "label": "Panic Switch & Immediate Crisis Short-Circuit",
+      "steps": ["node-shell", "node-danger", "node-crisis", "node-twilio"]
+    },
+    {
+      "id": "checkin-sos",
+      "label": "Silent Check-In & Dead-Man SOS Expiry",
+      "steps": ["node-shell", "node-gateway", "node-crisis", "node-twilio"]
+    },
+    {
+      "id": "zk-vault",
+      "label": "Zero-Knowledge Incident Vault Encryption",
+      "steps": ["node-shell", "node-vault", "node-supabase"]
+    },
+    {
+      "id": "complaint-dispatch",
+      "label": "Formal Legal Complaint & FIA/Police Routing",
+      "steps": ["node-shell", "node-gateway", "node-agency"]
+    }
+  ]
+}

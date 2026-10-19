@@ -1,0 +1,19 @@
+{
+  "name": "mehfooz-workflow-architecture",
+  "title": "Mehfooz AI Architecture & Interactive Animated Workflow",
+  "theme": "light",
+  "generatedAt": "2026-10-17T11:20:00Z",
+  "artifact": "index.html",
+  "features": [
+    "Bright clean light mode theme",
+    "Zero emojis, technical iconography and typographic tags",
+    "Stealth Auth with 18+ DOB calendar picker and 13-digit Pakistani CNIC check",
+    "Agentic Legal AI with input guardrails, context resolver, and hybrid RAG",
+    "Complaint Builder with statutory penal mapping and court-admissible PDF docket generator",
+    "Community safety network with 5-user corroboration rule and Pakistan Standard Time midnight quota reset",
+    "Silent Check-In with Web Battery Status API tracking and autonomous dead-man escalation",
+    "Verified telephony services: Resend Email and TextBee Android SIM SMS Gateway (no Twilio)",
+    "Interactive animated SVG flow with moving data packets and step tracing",
+    "Interactive node inspector with file paths, runtime code, and guarantees"
+  ]
+}

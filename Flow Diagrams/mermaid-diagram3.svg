@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 903.687 1671" width="903.687" height="1671" style="--bg:#FFFFFF;--fg:#3B3B3B;--line:#3B3B3B;--accent:#005FB8;--muted:#3B3B3BCC;--surface:#F8F8F8;--border:#3B3B3B;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="ActiveJourney" data-label="ActiveJourney">
+  <rect x="174.54399999999998" y="337.5" width="225.196" height="547.6" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="174.54399999999998" y="337.5" width="225.196" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="186.54399999999998" y="351.5" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">ActiveJourney</text>
+</g>
+<g class="subgraph" data-id="OverdueTrigger" data-label="OverdueTrigger">
+  <rect x="209.971" y="1001.4" width="653.716" height="547.6" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="209.971" y="1001.4" width="653.716" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="221.971" y="1015.4" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">OverdueTrigger</text>
+</g>
+<polyline class="edge" data-from="_start" data-to="Setup" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="User selects destination &amp; duration (e.g. 25 min)" points="287.142,68 287.14200000000005,184.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Setup" data-to="ActiveJourney" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Starts Journey Session" points="287.14200000000005,221.2 287.142,337.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ActiveJourney" data-to="ArrivedSafely" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="User taps &quot;I'm Safe&quot; + Enters PIN" points="249.60933333333332,885.1 249.60933333333332,921.1 119.5,921.1 119.5,1001.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ArrivedSafely" data-to="_end" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Session disarmed cleanly" points="119.5,1038.3 119.5,1154.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ActiveJourney" data-to="OverdueTrigger" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Timer reaches 00:00 without PIN" points="324.67466666666667,885.1 324.67466666666667,921.1 454.784,921.1 454.784,1001.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="TriggerEscalation" data-to="_end2" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="705.3217999999999,1379.8000000000002 705.3217999999999,1391.8000000000002 846.687,1391.8000000000002 846.687,1603" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start2" data-to="Tracking" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="OpenStreetMap Viewer + Dynamic POIs" points="287.544,409.5 287.544,525.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Tracking" data-to="Telemetry" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Track Battery Level &amp; GPS Ping" points="287.544,562.7 287.544,679" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Telemetry" data-to="Reminder" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="5 Min Expiry Warning" points="287.544,715.9 287.544,832.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start3" data-to="CountdownGrace" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="60-Second Duress Grace Period" points="660.281,1073.4 660.281,1189.7" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CountdownGrace" data-to="TriggerEscalation" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="No PIN entered" points="660.281,1226.6 660.281,1342.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="TriggerEscalation" data-to="TwilioSMS" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Dispatch Emergency SMS / WhatsApp" points="645.2674,1379.8 645.2674,1403.8 566.153,1403.8 566.153,1496.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="TriggerEscalation" data-to="ShareLocation" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Send Live GPS Coordinates to Trusted Contacts" points="615.2402,1379.8 615.2402,1391.8 343.471,1391.8 343.471,1496.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="TriggerEscalation" data-to="Police15" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Surface 1-Tap Direct Police 15 Call" points="675.2946,1379.8 675.2946,1403.8 754.409,1403.8 754.409,1496.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="_start" data-to="Setup" data-label="User selects destination &amp; duration (e.g. 25 min)">
+  <rect x="169.64199999999997" y="111" width="234.45999999999998" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="286.87199999999996" y="126.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">User selects destination &amp; duration (e.g. 25 min)</text>
+</g>
+<g class="edge-label" data-from="Setup" data-to="ActiveJourney" data-label="Starts Journey Session">
+  <rect x="221.642" y="264.2" width="130.51000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="286.897" y="279.34999999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Starts Journey Session</text>
+</g>
+<g class="edge-label" data-from="ActiveJourney" data-to="ArrivedSafely" data-label="User taps &quot;I'm Safe&quot; + Enters PIN">
+  <rect x="36" y="928.1" width="166.15" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="119.075" y="943.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">User taps &quot;I&#39;m Safe&quot; + Enters PIN</text>
+</g>
+<g class="edge-label" data-from="ArrivedSafely" data-to="_end" data-label="Session disarmed cleanly">
+  <rect x="50" y="1081.3" width="138.82600000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="119.41300000000001" y="1096.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Session disarmed cleanly</text>
+</g>
+<g class="edge-label" data-from="ActiveJourney" data-to="OverdueTrigger" data-label="Timer reaches 00:00 without PIN">
+  <rect x="370.784" y="928.1" width="167.33799999999997" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="454.453" y="943.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Timer reaches 00:00 without PIN</text>
+</g>
+<g class="edge-label" data-from="_start2" data-to="Tracking" data-label="OpenStreetMap Viewer + Dynamic POIs">
+  <rect x="186.54399999999998" y="452.5" width="201.196" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="287.142" y="467.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">OpenStreetMap Viewer + Dynamic POIs</text>
+</g>
+<g class="edge-label" data-from="Tracking" data-to="Telemetry" data-label="Track Battery Level &amp; GPS Ping">
+  <rect x="204.04399999999998" y="605.7" width="166.744" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="287.416" y="620.85" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Track Battery Level &amp; GPS Ping</text>
+</g>
+<g class="edge-label" data-from="Telemetry" data-to="Reminder" data-label="5 Min Expiry Warning">
+  <rect x="228.04399999999998" y="758.9" width="118.03600000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="287.062" y="774.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">5 Min Expiry Warning</text>
+</g>
+<g class="edge-label" data-from="_start3" data-to="CountdownGrace" data-label="60-Second Duress Grace Period">
+  <rect x="573.7810000000001" y="1116.3999999999999" width="172.09" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="659.826" y="1131.55" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">60-Second Duress Grace Period</text>
+</g>
+<g class="edge-label" data-from="CountdownGrace" data-to="TriggerEscalation" data-label="No PIN entered">
+  <rect x="616.2810000000001" y="1269.6" width="87.74200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="660.152" y="1284.75" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">No PIN entered</text>
+</g>
+<g class="edge-label" data-from="TriggerEscalation" data-to="TwilioSMS" data-label="Dispatch Emergency SMS / WhatsApp">
+  <rect x="468.15299999999996" y="1422.7999999999997" width="195.256" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="565.781" y="1437.9499999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Dispatch Emergency SMS / WhatsApp</text>
+</g>
+<g class="edge-label" data-from="TriggerEscalation" data-to="ShareLocation" data-label="Send Live GPS Coordinates to Trusted Contacts">
+  <rect x="221.971" y="1422.7999999999997" width="242.182" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="343.062" y="1437.9499999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Send Live GPS Coordinates to Trusted Contacts</text>
+</g>
+<g class="edge-label" data-from="TriggerEscalation" data-to="Police15" data-label="Surface 1-Tap Direct Police 15 Call">
+  <rect x="667.409" y="1422.7999999999997" width="173.278" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="754.048" y="1437.9499999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Surface 1-Tap Direct Police 15 Call</text>
+</g>
+<g class="node" data-id="_start" data-label="" data-shape="state-start">
+  <circle cx="287.142" cy="54" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="Setup" data-label="Setup" data-shape="rounded">
+  <rect x="249.12400000000002" y="184.3" width="76.036" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="287.14200000000005" y="202.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Setup</text>
+</g>
+<g class="node" data-id="ArrivedSafely" data-label="ArrivedSafely" data-shape="rounded">
+  <rect x="57.028999999999996" y="1001.4" width="124.942" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="119.5" y="1019.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ArrivedSafely</text>
+</g>
+<g class="node" data-id="_end" data-label="" data-shape="state-end">
+  <circle cx="119.5" cy="1168.6" r="12" fill="none" stroke="var(--_text)" stroke-width="1.5" />
+  <circle cx="119.5" cy="1168.6" r="8" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_end2" data-label="" data-shape="state-end">
+  <circle cx="846.687" cy="1617" r="12" fill="none" stroke="var(--_text)" stroke-width="1.5" />
+  <circle cx="846.687" cy="1617" r="8" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_start2" data-label="" data-shape="state-start">
+  <circle cx="287.544" cy="395.5" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="Tracking" data-label="Tracking" data-shape="rounded">
+  <rect x="239.152" y="525.8" width="96.78399999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="287.544" y="544.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Tracking</text>
+</g>
+<g class="node" data-id="Telemetry" data-label="Telemetry" data-shape="rounded">
+  <rect x="236.92899999999997" y="679" width="101.22999999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="287.544" y="697.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Telemetry</text>
+</g>
+<g class="node" data-id="Reminder" data-label="Reminder" data-shape="rounded">
+  <rect x="238.41099999999997" y="832.2" width="98.266" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="287.544" y="850.6500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Reminder</text>
+</g>
+<g class="node" data-id="_start3" data-label="" data-shape="state-start">
+  <circle cx="660.281" cy="1059.4" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="CountdownGrace" data-label="CountdownGrace" data-shape="rounded">
+  <rect x="588.177" y="1189.7" width="144.208" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="660.2810000000001" y="1208.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">CountdownGrace</text>
+</g>
+<g class="node" data-id="TriggerEscalation" data-label="TriggerEscalation" data-shape="rounded">
+  <rect x="585.213" y="1342.9" width="150.136" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="660.281" y="1361.3500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TriggerEscalation</text>
+</g>
+<g class="node" data-id="TwilioSMS" data-label="TwilioSMS" data-shape="rounded">
+  <rect x="513.6855" y="1496.1" width="104.93499999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="566.153" y="1514.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TwilioSMS</text>
+</g>
+<g class="node" data-id="ShareLocation" data-label="ShareLocation" data-shape="rounded">
+  <rect x="278.03599999999994" y="1496.1" width="130.87" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="343.47099999999995" y="1514.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ShareLocation</text>
+</g>
+<g class="node" data-id="Police15" data-label="Police15" data-shape="rounded">
+  <rect x="709.722" y="1496.1" width="89.374" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="754.409" y="1514.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Police15</text>
+</g>
+</svg>

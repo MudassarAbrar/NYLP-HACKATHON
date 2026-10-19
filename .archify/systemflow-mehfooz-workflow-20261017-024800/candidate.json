@@ -1,0 +1,112 @@
+{
+  "$schema": "https://archify.si/schemas/architecture.schema.json",
+  "meta": {
+    "title": "Mehfooz AI (محفوظ) - Complete System Architecture & Workflow",
+    "slug": "mehfooz-architecture-workflow",
+    "type": "architecture",
+    "quality_profile": "showcase",
+    "output": ".archify/systemflow-mehfooz-workflow-20261017-024800/mehfooz-architecture-workflow.html",
+    "timestamp": "20261017-024800",
+    "description": "Comprehensive verified architecture and workflow map of Mehfooz AI: Stealth weather cover, AI Legal Advisor RAG with Gemini fallback chain, Zero-Knowledge AES-256-GCM vault, Silent Check-In SOS engine, and Official department routing matrix."
+  },
+  "nodes": [
+    {
+      "id": "stealth-cover",
+      "label": "Stealth Weather Cover",
+      "type": "component",
+      "boundary": "client-browser",
+      "file": "src/components/WeatherCover.tsx",
+      "description": "Functional weather disguise with hidden PIN keypad and quick-exit panic trigger."
+    },
+    {
+      "id": "app-shell",
+      "label": "App Shell & Router",
+      "type": "component",
+      "boundary": "client-browser",
+      "file": "src/App.tsx",
+      "description": "Main orchestrator managing stealth state, tab routing, and panic switch."
+    },
+    {
+      "id": "crypto-vault",
+      "label": "Web Crypto Vault",
+      "type": "crypto",
+      "boundary": "client-browser",
+      "file": "src/utils/crypto.ts",
+      "description": "PBKDF2 key derivation and AES-GCM-256 zero-knowledge client encryption."
+    },
+    {
+      "id": "local-mirror",
+      "label": "Local Storage Mirror",
+      "type": "datastore",
+      "boundary": "client-browser",
+      "file": "src/utils/dataService.ts",
+      "description": "Air-gapped offline storage for incident drafts, contacts, and legal corpus."
+    },
+    {
+      "id": "express-server",
+      "label": "Express API Gateway",
+      "type": "gateway",
+      "boundary": "express-server",
+      "file": "server.ts",
+      "description": "Helmet CSP, input sanitization, and tiered rate-limiting policies."
+    },
+    {
+      "id": "orchestrator-endpoint",
+      "label": "AI Legal Orchestrator",
+      "type": "service",
+      "boundary": "express-server",
+      "file": "server.ts",
+      "description": "Handles /api/orchestrate, immediate danger checks, and model fallback loop."
+    },
+    {
+      "id": "hybrid-retriever",
+      "label": "Hybrid RAG Retriever",
+      "type": "service",
+      "boundary": "express-server",
+      "file": "src/utils/hybridRetriever.ts",
+      "description": "Vector cosine similarity + BM25 keyword matching over Pakistan Legal Corpus."
+    },
+    {
+      "id": "checkin-sos-engine",
+      "label": "Dead-Man SOS Engine",
+      "type": "service",
+      "boundary": "express-server",
+      "file": "server/checkIns.js",
+      "description": "Autonomous timer for journey tracking; triggers SMS/Email SOS upon expiry."
+    },
+    {
+      "id": "department-routing",
+      "label": "Agency Dispatch Matrix",
+      "type": "service",
+      "boundary": "express-server",
+      "file": "server/departmentRouting.js",
+      "description": "Direct complaint dispatch to FIA NR3C, Punjab Police 15, PCSW 1043, and FOSPAH."
+    },
+    {
+      "id": "gemini-api",
+      "label": "Google Gemini 2.5 Flash",
+      "type": "external-llm",
+      "boundary": "external-cloud",
+      "description": "Primary model with fallback chain to 1.5-flash and 1.5-pro."
+    },
+    {
+      "id": "supabase-cloud",
+      "label": "Supabase Cloud Database",
+      "type": "external-db",
+      "boundary": "external-cloud",
+      "description": "Ciphertext-only storage for vault records and user authentication."
+    },
+    {
+      "id": "twilio-resend",
+      "label": "Twilio SMS & Resend Email",
+      "type": "external-service",
+      "boundary": "external-cloud",
+      "description": "Emergency SMS broadcasts and official legal complaint email dispatch."
+    }
+  ],
+  "boundaries": [
+    { "id": "client-browser", "label": "Client Browser (Zero-Knowledge Realm)" },
+    { "id": "express-server", "label": "Express Backend Gateway (Port 3000)" },
+    { "id": "external-cloud", "label": "External Providers & Cloud Infrastructure" }
+  ]
+}

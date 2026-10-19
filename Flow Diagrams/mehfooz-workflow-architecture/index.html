@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mehfooz AI Architecture and Animated Workflow System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-faint: #94a3b8;
+      
+      --blue: #2563eb;
+      --blue-subtle: #eff6ff;
+      --blue-border: #bfdbfe;
+      
+      --emerald: #059669;
+      --emerald-subtle: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      
+      --amber: #d97706;
+      --amber-subtle: #fffbeb;
+      --amber-border: #fde68a;
+      
+      --purple: #7c3aed;
+      --purple-subtle: #f5f3ff;
+      --purple-border: #ddd6fe;
+      
+      --rose: #e11d48;
+      --rose-subtle: #fff1f2;
+      --rose-border: #fecdd3;
+      
+      --cyan: #0891b2;
+      --cyan-subtle: #ecfeff;
+      --cyan-border: #a5f3fc;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: radial-gradient(var(--border) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #2563eb, #0891b2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .brand-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      background: var(--emerald-subtle);
+      color: var(--emerald);
+      border: 1px solid var(--emerald-border);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px rgba(5, 150, 105, 0.6);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Sub-header Navigation Tabs */
+    nav.pipeline-nav {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .nav-btn.active {
+      background: var(--blue-subtle);
+      color: var(--blue);
+      border-color: var(--blue-border);
+    }
+
+    .nav-btn .num-indicator {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      background: rgba(0,0,0,0.06);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    .nav-btn.active .num-indicator {
+      background: var(--blue);
+      color: #ffffff;
+    }
+
+    /* Control Deck Toolbar */
+    .toolbar-deck {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.65rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .action-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .action-btn {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-strong);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-subtle);
+      border-color: var(--text-muted);
+    }
+
+    .action-btn.btn-play {
+      background: var(--blue);
+      color: #ffffff;
+      border-color: var(--blue);
+    }
+
+    .action-btn.btn-play:hover {
+      background: #1d4ed8;
+    }
+
+    .step-counter {
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      padding: 0.3rem 0.6rem;
+      background: var(--bg-subtle);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .search-filter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      width: 280px;
+    }
+
+    .search-filter input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      width: 100%;
+      font-family: var(--font-sans);
+    }
+
+    /* Main Content Area: Diagram Canvas & Inspector Drawer */
+    .main-workspace {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      flex: 1;
+      height: calc(100vh - 170px);
+      overflow: hidden;
+    }
+
+    @media (max-width: 1180px) {
+      .main-workspace {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    .diagram-viewport {
+      padding: 2rem;
+      overflow: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      scrollbar-width: thin;
+    }
+
+    /* SVG Canvas Styles */
+    svg.arch-canvas {
+      width: 100%;
+      max-width: 1150px;
+      height: auto;
+      min-height: 860px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.2s ease;
+    }
+
+    /* Node Card Components */
+    .svg-node {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .svg-node rect.node-card {
+      fill: #ffffff;
+      stroke: var(--border-strong);
+      stroke-width: 1.5;
+      rx: 8;
+      transition: all 0.2s ease;
+    }
+
+    .svg-node:hover rect.node-card {
+      stroke: var(--blue);
+      stroke-width: 2;
+      filter: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.15));
+    }
+
+    .svg-node.is-active rect.node-card {
+      stroke: var(--blue);
+      stroke-width: 2.5;
+      fill: var(--blue-subtle);
+      filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.35));
+    }
+
+    .svg-node.is-amber rect.node-card {
+      border-left: 4px solid var(--amber);
+    }
+
+    .svg-node.is-active.is-amber rect.node-card {
+      stroke: var(--amber);
+      fill: var(--amber-subtle);
+      filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.35));
+    }
+
+    .svg-node.is-active.is-emerald rect.node-card {
+      stroke: var(--emerald);
+      fill: var(--emerald-subtle);
+      filter: drop-shadow(0 0 10px rgba(5, 150, 105, 0.35));
+    }
+
+    .svg-node.is-active.is-purple rect.node-card {
+      stroke: var(--purple);
+      fill: var(--purple-subtle);
+      filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.35));
+    }
+
+    .svg-node.is-active.is-rose rect.node-card {
+      stroke: var(--rose);
+      fill: var(--rose-subtle);
+      filter: drop-shadow(0 0 10px rgba(225, 29, 72, 0.35));
+    }
+
+    .svg-node.is-active.is-cyan rect.node-card {
+      stroke: var(--cyan);
+      fill: var(--cyan-subtle);
+      filter: drop-shadow(0 0 10px rgba(8, 145, 178, 0.35));
+    }
+
+    /* Subsystem Boundary Regions */
+    rect.subsystem-boundary {
+      fill: rgba(248, 250, 252, 0.8);
+      stroke: #e2e8f0;
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
+      rx: 12;
+    }
+
+    text.subsystem-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      fill: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Connectors & Motion Data Packets */
+    path.connector-wire {
+      fill: none;
+      stroke: #cbd5e1;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+
+    path.connector-wire.active-wire {
+      stroke: var(--blue);
+      stroke-width: 2.5;
+    }
+
+    path.connector-wire.active-wire.is-emerald {
+      stroke: var(--emerald);
+    }
+
+    path.connector-wire.active-wire.is-rose {
+      stroke: var(--rose);
+    }
+
+    path.connector-wire.active-wire.is-purple {
+      stroke: var(--purple);
+    }
+
+    path.connector-wire.active-wire.is-cyan {
+      stroke: var(--cyan);
+    }
+
+    path.animated-packet {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 10 90;
+      animation: dashFlow 2s linear infinite;
+    }
+
+    path.animated-packet.is-emerald {
+      stroke: var(--emerald);
+    }
+
+    path.animated-packet.is-rose {
+      stroke: var(--rose);
+      animation: dashFlow 1.2s linear infinite;
+    }
+
+    path.animated-packet.is-purple {
+      stroke: var(--purple);
+    }
+
+    path.animated-packet.is-cyan {
+      stroke: var(--cyan);
+    }
+
+    @keyframes dashFlow {
+      from { stroke-dashoffset: 200; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    circle.flow-particle {
+      fill: var(--blue);
+      r: 4;
+      filter: drop-shadow(0 0 4px var(--blue));
+    }
+
+    /* Inspector Drawer Panel */
+    .inspector-panel {
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.02);
+    }
+
+    .inspector-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .inspector-tag {
+      display: inline-block;
+      font-size: 0.675rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-blue { background: var(--blue-subtle); color: var(--blue); border: 1px solid var(--blue-border); }
+    .tag-emerald { background: var(--emerald-subtle); color: var(--emerald); border: 1px solid var(--emerald-border); }
+    .tag-amber { background: var(--amber-subtle); color: var(--amber); border: 1px solid var(--amber-border); }
+    .tag-purple { background: var(--purple-subtle); color: var(--purple); border: 1px solid var(--purple-border); }
+    .tag-rose { background: var(--rose-subtle); color: var(--rose); border: 1px solid var(--rose-border); }
+    .tag-cyan { background: var(--cyan-subtle); color: var(--cyan); border: 1px solid var(--cyan-border); }
+
+    .inspector-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .inspector-filepath {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .inspector-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .section-label {
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .section-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .code-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.85rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      line-height: 1.5;
+      border: 1px solid #1e293b;
+    }
+
+    .guarantee-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .guarantee-item {
+      font-size: 0.825rem;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: #1e293b;
+    }
+
+    .guarantee-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Legend Bar at Bottom */
+    .legend-bar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-section">
+      <div class="brand-logo">M</div>
+      <div class="brand-title">
+        <h1>Mehfooz AI Architecture & Runtime Flow</h1>
+        <p>Verified Systems: Resend Email & TextBee Android SIM Gateway</p>
+      </div>
+    </div>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span>Light Mode Interactive Architecture</span>
+    </div>
+  </header>
+
+  <!-- Navigation Pipelines -->
+  <nav class="pipeline-nav">
+    <button class="nav-btn active" data-pipeline="master">
+      <span class="num-indicator">ALL</span>
+      <span>Master System Overview</span>
+    </button>
+    <button class="nav-btn" data-pipeline="auth">
+      <span class="num-indicator">01</span>
+      <span>Stealth Auth & 18+ Verification</span>
+    </button>
+    <button class="nav-btn" data-pipeline="agent">
+      <span class="num-indicator">02</span>
+      <span>Agentic AI & Hybrid RAG</span>
+    </button>
+    <button class="nav-btn" data-pipeline="complaint">
+      <span class="num-indicator">03</span>
+      <span>Complaint Builder & Dispatch</span>
+    </button>
+    <button class="nav-btn" data-pipeline="community">
+      <span class="num-indicator">04</span>
+      <span>Community 5-User Corroboration</span>
+    </button>
+    <button class="nav-btn" data-pipeline="checkin">
+      <span class="num-indicator">05</span>
+      <span>Silent Check-In & Dead-Man Timer</span>
+    </button>
+  </nav>
+
+  <!-- Toolbar & Controls -->
+  <div class="toolbar-deck">
+    <div class="action-controls">
+      <button class="action-btn btn-play" id="btnPlayFlow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span id="playText">Play Step Trace</span>
+      </button>
+      <button class="action-btn" id="btnNextStep">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>Next Step</span>
+      </button>
+      <button class="action-btn" id="btnResetFlow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+        <span>Reset</span>
+      </button>
+      <span class="step-counter" id="stepCounter">Step 1 of 6</span>
+    </div>
+
+    <div class="search-filter">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="nodeSearchInput" placeholder="Filter component, function or statute...">
+    </div>
+  </div>
+
+  <!-- Workspace: SVG Canvas & Inspector Drawer -->
+  <div class="main-workspace">
+    <div class="diagram-viewport" id="viewport">
+      <svg id="canvasSvg" class="arch-canvas" viewBox="0 0 1150 920">
+        <defs>
+          <marker id="arrow-default" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#94a3b8" />
+          </marker>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb" />
+          </marker>
+          <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#059669" />
+          </marker>
+          <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706" />
+          </marker>
+          <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#7c3aed" />
+          </marker>
+          <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#e11d48" />
+          </marker>
+          <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#0891b2" />
+          </marker>
+        </defs>
+
+        <!-- Dynamic SVG Content injected by JavaScript -->
+        <g id="boundariesLayer"></g>
+        <g id="connectorsLayer"></g>
+        <g id="nodesLayer"></g>
+      </svg>
+    </div>
+
+    <!-- Inspector Panel -->
+    <aside class="inspector-panel" id="inspectorPanel">
+      <div class="inspector-header">
+        <span class="inspector-tag tag-blue" id="insTag">CLIENT COMPONENT</span>
+        <h2 class="inspector-title" id="insTitle">WeatherCover Mask</h2>
+        <p class="inspector-filepath" id="insFile">src/components/WeatherCover.tsx</p>
+      </div>
+
+      <div class="inspector-body">
+        <div class="section-block">
+          <span class="section-label">Architecture & Function</span>
+          <p class="section-text" id="insDesc">
+            Disguised live weather forecast presentation. Conceals the safety application behind genuine meteorological information for Lahore and Punjab cities.
+          </p>
+        </div>
+
+        <div class="section-block">
+          <span class="section-label">Payload & Runtime Contract</span>
+          <pre class="code-box" id="insCode">// Runtime unlock contract
+const verifyPin = (inputPin: string): boolean => {
+  return hashPin(inputPin, salt) === storedHash;
+};</pre>
+        </div>
+
+        <div class="section-block">
+          <span class="section-label">Engineering & Safety Guarantees</span>
+          <ul class="guarantee-list" id="insGuarantees">
+            <li class="guarantee-item">
+              <span class="guarantee-bullet"></span>
+              <span>Opens cleanly as a weather widget under glance scrutiny.</span>
+            </li>
+            <li class="guarantee-item">
+              <span class="guarantee-bullet"></span>
+              <span>Double-tap gesture reveals secret numeric pin input modal.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Legend Footer -->
+  <footer class="legend-bar">
+    <span style="font-weight: 700; color: var(--text-main);">Verified Services:</span>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--blue);"></span>
+      <span>Client SPA & Auth</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--purple);"></span>
+      <span>Gemini 2.5 Agent & RAG</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--amber);"></span>
+      <span>Policy Confirmation Cards</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--emerald);"></span>
+      <span>Resend Email Service</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--cyan);"></span>
+      <span>TextBee Android SIM SMS Gateway</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-swatch" style="background: var(--rose);"></span>
+      <span>Dead-Man Crisis Escalation</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Pipeline Definitions & Structural Nodes ──────────────────────────────
+    const PIPELINES = {
+      master: {
+        title: "Master System Overview",
+        stepsCount: 6,
+        boundaries: [
+          { x: 30, y: 30, w: 260, h: 840, label: "01. CLIENT AUTH & ACCESS GATING" },
+          { x: 310, y: 30, w: 270, h: 840, label: "02. AGENTIC AI & HYBRID RAG" },
+          { x: 600, y: 30, w: 260, h: 840, label: "03. COMPLAINT & DEPT ROUTING" },
+          { x: 880, y: 30, w: 240, h: 840, label: "04. COMMUNITY & DEAD-MAN CHECK-IN" }
+        ],
+        nodes: [
+          // Subsystem 1: Auth & Gating
+          {
+            id: "m_weather",
+            x: 50, y: 70, w: 220, h: 85,
+            title: "WeatherCover.tsx",
+            subtitle: "Stealth Disguise Cover",
+            file: "src/components/WeatherCover.tsx",
+            tag: "CLIENT COMPONENT", tagClass: "tag-blue",
+            colorClass: "is-blue",
+            desc: "Disguised weather application layer displaying genuine live forecasts. Allows covert double-tap or discrete menu selection to trigger the secret PIN unlock modal.",
+            code: "// Discreet PIN keypad toggle\nconst handleKeypadUnlock = (pin) => {\n  if (verifyPin(pin)) setCoverUnlocked(true);\n};",
+            guarantees: [
+              "Zero indication of legal or safety functionality under visual scrutiny.",
+              "Direct escape button purges in-memory session back to weather in <16ms."
+            ]
+          },
+          {
+            id: "m_auth_check",
+            x: 50, y: 200, w: 220, h: 95,
+            title: "AuthModal.tsx",
+            subtitle: "18+ DOB & CNIC Verification",
+            file: "src/components/AuthModal.tsx",
+            tag: "IDENTITY VERIFICATION", tagClass: "tag-blue",
+            colorClass: "is-blue",
+            desc: "Calculates user age using HTML5 calendar picker (calculateAge). Rejects anyone under 18. Validates 13-digit Pakistani CNIC format (XXXXX-XXXXXXX-X). Mandates WhatsApp and Guardian Contact.",
+            code: "const age = calculateAge(dob);\nif (age < 18) throw new Error('Must be 18+ to register');\nif (!formatCnic(cnic).isValid) throw new Error('13-digit CNIC required');",
+            guarantees: [
+              "Strict 18+ adult user legal consent verification.",
+              "13-digit Pakistani CNIC auto-formatting without dummy fallbacks.",
+              "Mandatory WhatsApp & emergency contact numbers."
+            ]
+          },
+          {
+            id: "m_gate_check",
+            x: 50, y: 340, w: 220, h: 85,
+            title: "LegalAssistant.tsx",
+            subtitle: "Pre-Chat Contact Gate",
+            file: "src/components/LegalAssistant.tsx",
+            tag: "SECURITY GATE", tagClass: "tag-amber",
+            colorClass: "is-amber",
+            desc: "Evaluates hasRequiredContactInfo(user). Disables AI legal inquiries and presents an amber security banner if WhatsApp or emergency contacts are missing.",
+            code: "const isGated = !user?.phone || !user?.guardianPhone;\nif (isGated) {\n  showSecurityPrompt();\n  return;\n}",
+            guarantees: [
+              "Prevents advice delivery without active SOS escalation channels.",
+              "Direct link opens profile contact editor immediately."
+            ]
+          },
+
+          // Subsystem 2: Agentic AI
+          {
+            id: "m_guardrail",
+            x: 330, y: 70, w: 230, h: 90,
+            title: "inputGuardrail.ts",
+            subtitle: "Injection Filter & Crisis Check",
+            file: "server/agent/inputGuardrail.ts",
+            tag: "SERVER GUARDRAIL", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Filters prompt injections, malicious jailbreaks, and evaluates crisis urgency. If active weapons or imminent violence detected, triggers immediate SOS emergency modal.",
+            code: "const isDanger = detectImmediateViolence(message);\nif (isDanger) return emitHighPriorityCrisisTrigger();\nsanitizeInputPayload(message);",
+            guarantees: [
+              "Strips null bytes and script injection payloads.",
+              "Immediate danger triage executes before model function calls."
+            ]
+          },
+          {
+            id: "m_context",
+            x: 330, y: 200, w: 230, h: 95,
+            title: "contextResolver.ts",
+            subtitle: "Injected User & GPS Context",
+            file: "server/agent/contextResolver.ts",
+            tag: "AGENT CONTEXT", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Injects verified user identity, CNIC, home district (Lahore), registered contacts, and live GPS coordinates directly into system instructions. AI is strictly barred from re-asking verified details.",
+            code: "const systemInstruction = buildSystemInstruction({\n  user: resolvedProfile,\n  coords: clientGps,\n  laws: legalCorpusChunks\n});",
+            guarantees: [
+              "Zero redundant interrogation of user name, CNIC or contacts.",
+              "Grounds all statutory recommendations in Punjab provincial law."
+            ]
+          },
+          {
+            id: "m_runner",
+            x: 330, y: 340, w: 230, h: 95,
+            title: "runner.ts (Gemini 2.5)",
+            subtitle: "Bounded Function-Calling Loop",
+            file: "server/agent/runner.ts",
+            tag: "AGENT EXECUTION", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Multi-turn Gemini 2.5 Flash loop with hybrid RAG (60% embeddings + 40% keyword scoring). Classifies tool calls into read_only (auto-executed) vs requires_confirmation (side-effecting).",
+            code: "if (toolPolicy === 'requires_confirmation') {\n  const token = createPendingActionToken(toolCall);\n  return emitConfirmationCard(token);\n}",
+            guarantees: [
+              "Bounded execution timeout via Promise.race.",
+              "Fallback model chain: gemini-2.5-flash -> gemini-1.5-flash.",
+              "Side effects never run without explicit user confirmation."
+            ]
+          },
+
+          // Subsystem 3: Complaint & Routing
+          {
+            id: "m_complaint",
+            x: 620, y: 70, w: 220, h: 90,
+            title: "ComplaintBuilder.tsx",
+            subtitle: "Multi-Step Legal Wizard",
+            file: "src/components/ComplaintBuilder.tsx",
+            tag: "LEGAL WIZARD", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Multi-step petition wizard: category classification, chronological facts, evidence attachments (user-approved photos only), and statutory mapping.",
+            code: "const payload = {\n  category: selectedCategory,\n  attachedPhotos: userApprovedPhotos ? photos : [],\n  narrative: factsTimeline\n};",
+            guarantees: [
+              "Photographs only included if user grants explicit consent checkbox.",
+              "Maps incident facts directly to applicable legal citations."
+            ]
+          },
+          {
+            id: "m_pdf",
+            x: 620, y: 200, w: 220, h: 95,
+            title: "pdfExport.ts",
+            subtitle: "Tamper-Evident Docket PDF",
+            file: "src/utils/pdfExport.ts",
+            tag: "DOCUMENT GENERATOR", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Compiles court-admissible jsPDF docket with penal citations (PPC 509/354, PECA 20/21, PPWVA), evidence index with SHA-256 hashes, Section 193 PPC oath statement, and verification barcode.",
+            code: "doc.text('STATEMENT UNDER OATH (SECTION 193 PPC)');\ndoc.addImage(barcodeBase64, 'PNG', 140, 20, 50, 15);",
+            guarantees: [
+              "Itemized evidence ledger with file sizes and SHA-256 checksums.",
+              "Machine-readable case tracking reference (DOC-XXXX-XXXXXX)."
+            ]
+          },
+          {
+            id: "m_dept_dispatch",
+            x: 620, y: 340, w: 220, h: 95,
+            title: "departmentRouting.ts",
+            subtitle: "Resend Email & Official API",
+            file: "server/departmentRouting.ts",
+            tag: "OFFICIAL DISPATCH", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Routes complaints to official channels (PSCA 15, PCSW 1043, Punjab Ombudsperson, FIA NR3C). Hits official API receiver and dispatches formal email via Resend with user reply-to.",
+            code: "// Step 1: POST to Official Dept API\nawait postToOfficialDeptApi(deptId, payload);\n// Step 2: Resend Email Dispatch\nawait resend.emails.send({ to: dept.email, reply_to: user.email });",
+            guarantees: [
+              "Dispatches email with complainant email set as Reply-To for direct response.",
+              "User receives confirmation copy with tracking number.",
+              "All dispatches recorded in api_activity_logs."
+            ]
+          },
+
+          // Subsystem 4: Community & Check-In
+          {
+            id: "m_community",
+            x: 895, y: 70, w: 210, h: 95,
+            title: "community.ts",
+            subtitle: "5-User Corroboration Engine",
+            file: "server/community.ts",
+            tag: "COMMUNITY SAFETY", tagClass: "tag-cyan",
+            colorClass: "is-cyan",
+            desc: "Reports tagged by campus (UCP, UMT, UOL, PU, LUMS) or sector. Strict PST midnight daily limit (5 reports, 5 updates). 5 independent user confirmations escalate issue to community_corroborated.",
+            code: "const dayBounds = getPakistanDayBounds();\nif (userReportsToday >= 5) throw new Error('Daily PST limit reached');\nif (confirmations >= 5) status = 'community_corroborated';",
+            guarantees: [
+              "Asia/Karachi UTC+5 midnight daily quota resets.",
+              "2-hour duplicate detection hash window prevents spam.",
+              "Anonymous display names with zero CNIC exposure."
+            ]
+          },
+          {
+            id: "m_checkin",
+            x: 895, y: 200, w: 210, h: 95,
+            title: "SilentCheckIn.tsx",
+            subtitle: "GPS & Battery % Telemetry",
+            file: "src/components/SilentCheckIn.tsx",
+            tag: "DEAD-MAN TIMER", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "Destination journey timer with GPS breadcrumbs, Web Battery Status API (% and charging state), and quick calc disguised mode. Unconfirmed arrival triggers 2-minute discreet grace countdown.",
+            code: "const battery = await navigator.getBattery();\nconst payload = {\n  batteryLevel: Math.round(battery.level * 100),\n  isCharging: battery.charging\n};",
+            guarantees: [
+              "Live battery status lets contacts distinguish dead battery from emergency.",
+              "Quick Calc stealth mode conceals tracking behind functional calculator."
+            ]
+          },
+          {
+            id: "m_deadman_esc",
+            x: 895, y: 340, w: 210, h: 95,
+            title: "TextBee SMS & Escalation",
+            subtitle: "Local SIM & WhatsApp URL",
+            file: "server/sms.ts",
+            tag: "AUTONOMOUS ESCALATION", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "Supabase Edge Function (check-in-monitor) and server detect expired grace countdown. Dispatches direct SMS via TextBee Android SIM Gateway, WhatsApp link, and Resend email.",
+            code: "// TextBee Android SIM Gateway dispatch\nawait fetch('https://api.textbee.dev/api/v1/gateway/devices/.../send-sms', {\n  body: JSON.stringify({ recipients: [guardianPhone], message: alertBody })\n});",
+            guarantees: [
+              "Direct local Pakistani SIM delivery via TextBee Gateway.",
+              "Includes Google Maps coordinates and battery percentage in SMS.",
+              "Zero Twilio dependency."
+            ]
+          }
+        ],
+        connectors: [
+          // Auth flow
+          { from: "m_weather", to: "m_auth_check", class: "active-wire" },
+          { from: "m_auth_check", to: "m_gate_check", class: "active-wire" },
+          { from: "m_gate_check", to: "m_guardrail", class: "active-wire is-purple" },
+          
+          // Agent flow
+          { from: "m_guardrail", to: "m_context", class: "active-wire is-purple" },
+          { from: "m_context", to: "m_runner", class: "active-wire is-purple" },
+          { from: "m_runner", to: "m_complaint", class: "active-wire is-emerald" },
+          
+          // Complaint flow
+          { from: "m_complaint", to: "m_pdf", class: "active-wire is-emerald" },
+          { from: "m_pdf", to: "m_dept_dispatch", class: "active-wire is-emerald" },
+          
+          // Check-in flow
+          { from: "m_checkin", to: "m_deadman_esc", class: "active-wire is-rose" }
+        ]
+      },
+
+      auth: {
+        title: "Authentication, 18+ Verification & Chat Gating Flow",
+        stepsCount: 5,
+        boundaries: [
+          { x: 80, y: 40, w: 990, h: 800, label: "AUTHENTICATION, AGE VERIFICATION & CHAT GATING LIFECYCLE" }
+        ],
+        nodes: [
+          {
+            id: "a1",
+            x: 130, y: 100, w: 260, h: 100,
+            title: "WeatherCover.tsx",
+            subtitle: "Stealth Disguise Cover",
+            file: "src/components/WeatherCover.tsx",
+            tag: "ENTRY POINT", tagClass: "tag-blue",
+            colorClass: "is-blue",
+            desc: "The app opens strictly presenting live Lahore and Punjab weather metrics. No safety indicators are exposed. User performs a discrete double-tap or taps the subtle menu button to prompt the secret PIN keypad.",
+            code: "const onSecretTrigger = () => {\n  setIsPinModalOpen(true);\n};",
+            guarantees: ["Innocuous presentation.", "Instant escape purge button."]
+          },
+          {
+            id: "a2",
+            x: 130, y: 260, w: 260, h: 100,
+            title: "PIN Keypad Modal",
+            subtitle: "Secret PIN Verification",
+            file: "src/components/WeatherCover.tsx",
+            tag: "VAULT UNLOCK", tagClass: "tag-blue",
+            colorClass: "is-blue",
+            desc: "Compares entered 4-digit PIN against stored PBKDF2 hash. Incorrect PIN leaves the user on the weather cover with zero indication of failure. Correct PIN unlocks the app router.",
+            code: "if (enteredPin === userProfile.stealthPin) {\n  setAppUnlocked(true);\n}",
+            guarantees: ["Timing attack safe.", "Failed attempts remain silently on weather."]
+          },
+          {
+            id: "a3",
+            x: 130, y: 420, w: 260, h: 110,
+            title: "AuthModal.tsx",
+            subtitle: "DOB 18+ & CNIC Checks",
+            file: "src/components/AuthModal.tsx",
+            tag: "REGISTRATION", tagClass: "tag-blue",
+            colorClass: "is-blue",
+            desc: "Interactive HTML5 date-of-birth calendar picker dynamically calculates age via calculateAge(dob). Rejects registrations under 18 years. Enforces 13-digit Pakistani CNIC format (XXXXX-XXXXXXX-X).",
+            code: "const calculatedAge = calculateAge(dobInput);\nif (calculatedAge < 18) {\n  setError('You must be at least 18 years old to create an account.');\n  return;\n}",
+            guarantees: [
+              "18+ age verification prevents underage signups.",
+              "13-digit Pakistani CNIC validation.",
+              "Mandatory Safe WhatsApp and Guardian Contact."
+            ]
+          },
+          {
+            id: "a4",
+            x: 130, y: 590, w: 260, h: 100,
+            title: "Onboarding Check",
+            subtitle: "First-Time Token Router",
+            file: "src/utils/auth.ts",
+            tag: "CLIENT ROUTER", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Checks localStorage for mehfooz_onboarding_token_<id>. If present, opens Home Dashboard directly. If missing, guides user through first-time safety walkthrough without server overhead.",
+            code: "if (!hasUserCompletedOnboarding(user.id)) {\n  openOnboardingModal();\n}",
+            guarantees: ["Zero server overhead.", "Clean initial walkthrough."]
+          },
+          {
+            id: "a5",
+            x: 600, y: 340, w: 320, h: 130,
+            title: "LegalAssistant Pre-Chat Gate",
+            subtitle: "Mandatory Contact Enforcement",
+            file: "src/components/LegalAssistant.tsx",
+            tag: "SECURITY GATE", tagClass: "tag-amber",
+            colorClass: "is-amber",
+            desc: "Before sending any query to the legal advisor, hasRequiredContactInfo(user) validates that the user profile has an active safe mobile/WhatsApp number and emergency contact. If absent, message sending is disabled and an amber banner prompts completion.",
+            code: "const hasContact = Boolean(user?.phone?.trim() && user?.guardianPhone?.trim());\nif (!hasContact) {\n  setIsAuthModalOpen(true);\n  return;\n}",
+            guarantees: [
+              "Gating ensures emergency escalation channels exist before consultations.",
+              "Prevents disconnected panic scenarios."
+            ]
+          }
+        ],
+        connectors: [
+          { from: "a1", to: "a2", class: "active-wire" },
+          { from: "a2", to: "a3", class: "active-wire" },
+          { from: "a3", to: "a4", class: "active-wire is-emerald" },
+          { from: "a4", to: "a5", class: "active-wire is-amber" }
+        ]
+      },
+
+      agent: {
+        title: "Agentic Legal AI, Hybrid RAG & Bounded Execution Loop",
+        stepsCount: 6,
+        boundaries: [
+          { x: 80, y: 40, w: 990, h: 800, label: "AGENTIC AI FUNCTION-CALLING & RAG GROUNDING ENGINE" }
+        ],
+        nodes: [
+          {
+            id: "ag1",
+            x: 130, y: 100, w: 260, h: 95,
+            title: "User Legal Inquiry",
+            subtitle: "English, Urdu, Roman Urdu",
+            file: "src/components/LegalAssistant.tsx",
+            tag: "INPUT INGESTION", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "User inputs legal questions via text or Web Speech voice. Dispatches payload to POST /api/agent with prior message history.",
+            code: "const res = await fetch('/api/agent', {\n  method: 'POST',\n  body: JSON.stringify({ message, history })\n});",
+            guarantees: ["Full bilingual support (English, Urdu script, Roman Urdu)."]
+          },
+          {
+            id: "ag2",
+            x: 130, y: 240, w: 260, h: 95,
+            title: "inputGuardrail.ts",
+            subtitle: "Prompt Injection & Danger Check",
+            file: "server/agent/inputGuardrail.ts",
+            tag: "GUARDRAIL", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Strips null bytes, script tags, and checks for prompt injections. Performs instant danger triage: if immediate weapon or violence is mentioned, responds with urgent crisis modal trigger.",
+            code: "if (hasImmediateThreat(message)) {\n  return triggerHighPriorityCrisisModal();\n}",
+            guarantees: ["Zero injection bypass.", "Immediate crisis escalation."]
+          },
+          {
+            id: "ag3",
+            x: 130, y: 380, w: 260, h: 100,
+            title: "contextResolver.ts",
+            subtitle: "Injected Profile & GPS Data",
+            file: "server/agent/contextResolver.ts",
+            tag: "CONTEXT INJECTION", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Injects verified user identity, age, CNIC, home district (Lahore), guardian details, and real-time GPS coordinates directly into system instruction. Agent is strictly prohibited from re-asking verified details.",
+            code: "const systemInstruction = buildSystemInstruction({\n  user: verifiedProfile,\n  location: clientCoordinates\n});",
+            guarantees: ["Trauma-informed assistance without repetitive interrogation."]
+          },
+          {
+            id: "ag4",
+            x: 130, y: 530, w: 260, h: 105,
+            title: "Hybrid Legal RAG",
+            subtitle: "60% Embeddings + 40% BM25",
+            file: "src/utils/hybridRetriever.ts",
+            tag: "RETRIEVAL ENGINE", tagClass: "tag-purple",
+            colorClass: "is-purple",
+            desc: "Combines semantic vector embeddings (gemini-embedding-2) with BM25 keyword matching across 34 Punjab & Pakistan protection statutes. Eliminates hallucination by attaching exact section numbers.",
+            code: "const score = 0.60 * semanticScore + 0.40 * keywordScore;\nreturn topRankedStatutes(score);",
+            guarantees: ["Cites exact statutory sections (PPC 509, PECA 20, PPWVA)."]
+          },
+          {
+            id: "ag5",
+            x: 600, y: 200, w: 320, h: 110,
+            title: "runner.ts & policies.ts",
+            subtitle: "Policy Engine Classification",
+            file: "server/agent/runner.ts",
+            tag: "POLICY GATE", tagClass: "tag-amber",
+            colorClass: "is-amber",
+            desc: "Evaluates proposed tool execution against policies: read_only tools execute automatically. Side-effecting tools (send_sos_sms, email_complaint_to_authority) PAUSE the agent loop and generate a pending action token.",
+            code: "if (policy === 'requires_confirmation') {\n  const actionToken = savePendingAction(toolCall);\n  return { status: 'PENDING_CONFIRMATION', actionToken };\n}",
+            guarantees: ["Side-effecting actions never execute without user consent."]
+          },
+          {
+            id: "ag6",
+            x: 600, y: 380, w: 320, h: 115,
+            title: "AgentActionCard & Execution",
+            subtitle: "User Confirmation & Dispatch",
+            file: "src/components/AgentActionCard.tsx",
+            tag: "EXECUTION & AUDIT", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Client displays an interactive action confirmation card. User clicks Confirm, hitting POST /api/agent/confirm. Executor runs external dispatch, logging duration and status into api_activity_logs with secret redaction.",
+            code: "await confirmAgentAction(token);\nlogApiActivity({\n  targetService: 'department_dispatch',\n  status: 'success'\n});",
+            guarantees: ["Audit trail logged in api_activity_logs.", "Secrets redacted."]
+          }
+        ],
+        connectors: [
+          { from: "ag1", to: "ag2", class: "active-wire is-purple" },
+          { from: "ag2", to: "ag3", class: "active-wire is-purple" },
+          { from: "ag3", to: "ag4", class: "active-wire is-purple" },
+          { from: "ag4", to: "ag5", class: "active-wire is-amber" },
+          { from: "ag5", to: "ag6", class: "active-wire is-emerald" }
+        ]
+      },
+
+      complaint: {
+        title: "Complaint Builder Wizard & Department Dispatch",
+        stepsCount: 5,
+        boundaries: [
+          { x: 80, y: 40, w: 990, h: 800, label: "LEGAL COMPLAINT COMPILATION & OFFICIAL ROUTING" }
+        ],
+        nodes: [
+          {
+            id: "c1",
+            x: 130, y: 110, w: 260, h: 100,
+            title: "ComplaintBuilder.tsx",
+            subtitle: "Category & Timeline Intake",
+            file: "src/components/ComplaintBuilder.tsx",
+            tag: "WIZARD INTAKE", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Guided multi-step form: user selects category (domestic violence, cyber harassment, workplace harassment, stalking), provides incident dates, times, and location details.",
+            code: "const [category, setCategory] = useState('domestic_violence');",
+            guarantees: ["Structured factual intake.", "Validates required narrative fields."]
+          },
+          {
+            id: "c2",
+            x: 130, y: 270, w: 260, h: 100,
+            title: "Statutory Penal Mapper",
+            subtitle: "PPC, PECA & PPWVA Mapping",
+            file: "src/utils/pdfExport.ts",
+            tag: "LEGAL CITATIONS", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Automatically correlates facts with legal remedies: PPC 509 & 354 (modesty/assault), PPC 506 (threats), PECA 2016 Sections 20/21/24 (cyber stalking/imagery), and PPWVA 2016 protection orders.",
+            code: "const legalTitle = getLegalCategoryTitle(category);\n// Maps to statutory provisions under Punjab & Federal Law",
+            guarantees: ["Ground truth citations with zero legal ambiguity."]
+          },
+          {
+            id: "c3",
+            x: 130, y: 430, w: 260, h: 105,
+            title: "Attached Photos Check",
+            subtitle: "Explicit Complainant Consent",
+            file: "src/components/ComplaintBuilder.tsx",
+            tag: "EVIDENCE PRIVACY", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Attached photographic evidence is only transmitted if the user explicitly checks the authorization toggle (attachedPhotos: userApprovedPhotos ? photos : []). Otherwise, photos remain in the local encrypted vault.",
+            code: "attachedPhotos: userApprovedPhotos ? photos : []",
+            guarantees: ["Complainant retains total sovereignty over private evidence."]
+          },
+          {
+            id: "c4",
+            x: 130, y: 600, w: 260, h: 115,
+            title: "pdfExport.ts",
+            subtitle: "Court-Admissible Docket PDF",
+            file: "src/utils/pdfExport.ts",
+            tag: "DOCKET GENERATOR", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Compiles formal multi-page PDF docket. Includes applicant bio, accused details, incident narrative, evidence ledger with SHA-256 hashes, Section 193 PPC oath statement, and verification barcode.",
+            code: "doc.text('FORMAL PETITION UNDER CR.P.C / PPWVA 2016');\ndoc.addImage(barcode, 'PNG', 140, 20, 50, 15);",
+            guarantees: [
+              "Cryptographic hash ledger of all evidence.",
+              "Section 193 PPC formal oath statement."
+            ]
+          },
+          {
+            id: "c5",
+            x: 600, y: 330, w: 320, h: 130,
+            title: "departmentRouting.ts",
+            subtitle: "Resend Email & Official API Dispatch",
+            file: "server/departmentRouting.ts",
+            tag: "OFFICIAL DISPATCH", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Routes to PSCA Emergency 15, PCSW 1043, Punjab Ombudsperson, or FIA NR3C. Hits official API receiver endpoint and dispatches formal email via Resend Email Service with Reply-To set to complainant's email. Dispatches confirmation copy to user.",
+            code: "await postToOfficialDeptApi(deptId, payload);\nawait resend.emails.send({\n  from: process.env.EMAIL_FROM,\n  to: dept.email,\n  reply_to: userEmail,\n  subject: `Formal Complaint: ${trackingNumber}`\n});",
+            guarantees: [
+              "Direct department email dispatch via Resend.",
+              "Reply-To set directly to complainant for official follow-up.",
+              "User receives confirmation copy with tracking number."
+            ]
+          }
+        ],
+        connectors: [
+          { from: "c1", to: "c2", class: "active-wire is-emerald" },
+          { from: "c2", to: "c3", class: "active-wire is-emerald" },
+          { from: "c3", to: "c4", class: "active-wire is-emerald" },
+          { from: "c4", to: "c5", class: "active-wire is-emerald" }
+        ]
+      },
+
+      community: {
+        title: "Community Safety Network & 5-User Corroboration Engine",
+        stepsCount: 5,
+        boundaries: [
+          { x: 80, y: 40, w: 990, h: 800, label: "COMMUNITY REPORTING, 5-USER CORROBORATION & MODERATION" }
+        ],
+        nodes: [
+          {
+            id: "cm1",
+            x: 130, y: 110, w: 260, h: 100,
+            title: "Regional & Campus Tagging",
+            subtitle: "Universities & Sectors",
+            file: "server/community.ts",
+            tag: "GEO TAGGING", tagClass: "tag-cyan",
+            colorClass: "is-cyan",
+            desc: "Reports tagged by university campus (UCP, UMT, UOL, PU, LUMS) or municipal sectors (Johar Town, Model Town, Gulberg, DHA). Categorized by hazard type (harassment, poor lighting, unsafe area).",
+            code: "GET /api/community/regions\n// Returns university campuses and municipal sectors",
+            guarantees: ["Precise institutional and sector categorization."]
+          },
+          {
+            id: "cm2",
+            x: 130, y: 270, w: 260, h: 100,
+            title: "PST Daily Quota Check",
+            subtitle: "Midnight Asia/Karachi Reset",
+            file: "server/community.ts",
+            tag: "QUOTA CONTROL", tagClass: "tag-cyan",
+            colorClass: "is-cyan",
+            desc: "Enforces max 5 reports and 5 updates per user per Pakistan Standard Time day (getPakistanDayBounds). Quotas reset at 00:00:00 PKT midnight (UTC+5), preventing bot spamming.",
+            code: "const { startIso, endIso } = getPakistanDayBounds();\nif (countUserReportsToday(userId) >= 5) {\n  return res.status(429).json({ error: 'Daily limit reached' });\n}",
+            guarantees: ["Anchored to Pakistan Standard Time midnight reset."]
+          },
+          {
+            id: "cm3",
+            x: 130, y: 430, w: 260, h: 105,
+            title: "Deduplication & Sanitization",
+            subtitle: "2-Hour Duplicate Window",
+            file: "server/community.ts",
+            tag: "SPAM PROTECTION", tagClass: "tag-cyan",
+            colorClass: "is-cyan",
+            desc: "Generates SHA-256 hash of location and text. Blocks duplicate submissions within 2 hours. Sanitizes reporter names to anonymous aliases (Community Guardian) and strips exact residential street addresses.",
+            code: "if (hasDuplicateWithinWindow(contentHash, 2 * 60 * 60 * 1000)) {\n  return res.status(409).json({ error: 'Duplicate detected' });\n}",
+            guarantees: [
+              "2-hour duplicate suppression window.",
+              "Sanitized anonymous display names.",
+              "Protects victims from retaliatory doxxing."
+            ]
+          },
+          {
+            id: "cm4",
+            x: 130, y: 600, w: 260, h: 105,
+            title: "Dual Storage Persistence",
+            subtitle: "Supabase + Disk Backup",
+            file: "supabase/migrations/0005_community_system.sql",
+            tag: "PERSISTENCE", tagClass: "tag-cyan",
+            colorClass: "is-cyan",
+            desc: "Persists records to Supabase PostgreSQL community_reports table with Row-Level Security. Automatically syncs atomic backup to data/community_store.json for local/offline operation.",
+            code: "insert into public.community_reports (id, title, category, region_id, ...)\n// Atomic backup written to data/community_store.json",
+            guarantees: ["Full offline resilience via local disk fallback store."]
+          },
+          {
+            id: "cm5",
+            x: 600, y: 340, w: 320, h: 125,
+            title: "The 5-User Corroboration Rule",
+            subtitle: "POST /api/community/reports/:id/confirm",
+            file: "server/community.ts",
+            tag: "CORROBORATION RULE", tagClass: "tag-emerald",
+            colorClass: "is-emerald",
+            desc: "Initial report enters as single_report. Independent registered users in that area submit confirmations. Once 5 distinct independent accounts verify the issue within 30 days, status elevates to community_corroborated with a verified shield.",
+            code: "const confirmations = addConfirmation(reportId, userId, type);\nif (confirmations >= 5) {\n  report.corroborationStatus = 'community_corroborated';\n}",
+            guarantees: [
+              "5 independent accounts required for verification.",
+              "Single accounts cannot duplicate confirmations.",
+              "Graduated anti-abuse moderation with in-app appeal system."
+            ]
+          }
+        ],
+        connectors: [
+          { from: "cm1", to: "cm2", class: "active-wire is-cyan" },
+          { from: "cm2", to: "cm3", class: "active-wire is-cyan" },
+          { from: "cm3", to: "cm4", class: "active-wire is-cyan" },
+          { from: "cm4", to: "cm5", class: "active-wire is-emerald" }
+        ]
+      },
+
+      checkin: {
+        title: "Silent Check-In & Autonomous Dead-Man Escalation",
+        stepsCount: 5,
+        boundaries: [
+          { x: 80, y: 40, w: 990, h: 800, label: "AUTONOMOUS TRANSIT TRACKING & DEAD-MAN ESCALATION" }
+        ],
+        nodes: [
+          {
+            id: "ck1",
+            x: 130, y: 110, w: 260, h: 100,
+            title: "Journey Configuration",
+            subtitle: "Destination & Countdown",
+            file: "src/components/SilentCheckIn.tsx",
+            tag: "JOURNEY SETUP", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "User selects destination (geocoded via Nominatim / osmService.ts) and travel duration. Designates trusted guardian contacts for emergency alerts.",
+            code: "POST /api/check-in/start\n{ destination, expectedMinutes, emergencyContacts }",
+            guarantees: ["Destination geocoded with coordinates and address."]
+          },
+          {
+            id: "ck2",
+            x: 130, y: 270, w: 260, h: 105,
+            title: "GPS & Battery % Telemetry",
+            subtitle: "Web Battery Status API",
+            file: "src/components/SilentCheckIn.tsx",
+            tag: "DEVICE TELEMETRY", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "Continuously samples GPS breadcrumb coordinates. Queries Web Battery Status API (navigator.getBattery) to capture battery percentage and charging state (*Phone Battery:* 85% Charging). Logs phone ringer status.",
+            code: "const battery = await navigator.getBattery();\nconst payload = {\n  batteryLevel: Math.round(battery.level * 100),\n  isCharging: battery.charging\n};",
+            guarantees: [
+              "Contacts can distinguish dead battery from physical danger.",
+              "Timestamped breadcrumb route history."
+            ]
+          },
+          {
+            id: "ck3",
+            x: 130, y: 440, w: 260, h: 95,
+            title: "Quick Calc Disguised Mode",
+            subtitle: "Operational Calculator Mask",
+            file: "src/components/SilentCheckIn.tsx",
+            tag: "STEALTH MASK", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "One-tap toggle transforms screen into functional calculator widget. If observed by aggressors, standard arithmetic is displayed while background timers and silent SOS triggers stay operational.",
+            code: "const [isCalcMode, setIsCalcMode] = useState(false);\n// Renders functional calculator while timers tick in background",
+            guarantees: ["Flawless calculator mask under direct glance scrutiny."]
+          },
+          {
+            id: "ck4",
+            x: 130, y: 600, w: 260, h: 100,
+            title: "Timer Expiry & Grace Countdown",
+            subtitle: "2-Minute Discreet Grace",
+            file: "server/checkIns.ts",
+            tag: "GRACE TIMER", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "When journey timer reaches 0:00, a discreet 2-minute grace countdown runs with silent haptic prompts. User can confirm safe arrival or enter PIN to cancel.",
+            code: "if (now > expectedArrivalTime && !isConfirmed) {\n  startDiscreetGraceCountdown(120_000);\n}",
+            guarantees: ["Prevents false alarms caused by transit delays."]
+          },
+          {
+            id: "ck5",
+            x: 600, y: 340, w: 320, h: 135,
+            title: "Autonomous Dead-Man Escalation",
+            subtitle: "TextBee Android SIM & Resend",
+            file: "server/sms.ts",
+            tag: "DEAD-MAN ESCALATION", tagClass: "tag-rose",
+            colorClass: "is-rose",
+            desc: "Supabase Edge Function (check-in-monitor) detects expired grace period. Dispatches direct SMS via TextBee Android SIM Gateway using local Pakistani SIM cards, WhatsApp alert with OpenStreetMap live tracking URL, and Resend emergency email.",
+            code: "// TextBee Android SIM Gateway Dispatch\nawait fetch('https://api.textbee.dev/api/v1/gateway/devices/.../send-sms', {\n  body: JSON.stringify({\n    recipients: [contactPhone],\n    message: `*Mehfooz AI Missed Check In Alert*\\nLast Location: ${mapUrl}\\nBattery: ${battery}%`\n  })\n});",
+            guarantees: [
+              "Direct local Pakistani SIM delivery via TextBee Gateway.",
+              "WhatsApp alert with OpenStreetMap tracking link.",
+              "Resend transactional email with emergency dossier.",
+              "Zero Twilio dependency."
+            ]
+          }
+        ],
+        connectors: [
+          { from: "ck1", to: "ck2", class: "active-wire is-rose" },
+          { from: "ck2", to: "ck3", class: "active-wire is-rose" },
+          { from: "ck3", to: "ck4", class: "active-wire is-rose" },
+          { from: "ck4", to: "ck5", class: "active-wire is-rose" }
+        ]
+      }
+    };
+
+    // ── Application State ────────────────────────────────────────────────────
+    let currentPipelineKey = 'master';
+    let currentStepIndex = 0;
+    let isPlaying = false;
+    let playInterval = null;
+
+    // ── Render Function ──────────────────────────────────────────────────────
+    function renderPipeline(pipelineKey) {
+      currentPipelineKey = pipelineKey;
+      currentStepIndex = 0;
+      clearInterval(playInterval);
+      isPlaying = false;
+      updatePlayButtonUI();
+
+      const pipeline = PIPELINES[pipelineKey];
+      const boundariesLayer = document.getElementById('boundariesLayer');
+      const connectorsLayer = document.getElementById('connectorsLayer');
+      const nodesLayer = document.getElementById('nodesLayer');
+
+      boundariesLayer.innerHTML = '';
+      connectorsLayer.innerHTML = '';
+      nodesLayer.innerHTML = '';
+
+      // 1. Render Boundaries
+      pipeline.boundaries.forEach(b => {
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', b.x);
+        rect.setAttribute('y', b.y);
+        rect.setAttribute('width', b.w);
+        rect.setAttribute('height', b.h);
+        rect.setAttribute('class', 'subsystem-boundary');
+        boundariesLayer.appendChild(rect);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', b.x + 16);
+        text.setAttribute('y', b.y + 24);
+        text.setAttribute('class', 'subsystem-label');
+        text.textContent = b.label;
+        boundariesLayer.appendChild(text);
+      });
+
+      // 2. Render Connectors
+      pipeline.connectors.forEach(c => {
+        const fromNode = pipeline.nodes.find(n => n.id === c.from);
+        const toNode = pipeline.nodes.find(n => n.id === c.to);
+        if (!fromNode || !toNode) return;
+
+        const pathData = calculateConnectorPath(fromNode, toNode);
+
+        // Background wire
+        const wire = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        wire.setAttribute('d', pathData);
+        wire.setAttribute('class', `connector-wire ${c.class || ''}`);
+        wire.setAttribute('id', `wire_${c.from}_${c.to}`);
+        wire.setAttribute('marker-end', getMarkerForClass(c.class));
+        connectorsLayer.appendChild(wire);
+
+        // Animated packet track
+        const packet = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        packet.setAttribute('d', pathData);
+        packet.setAttribute('class', `animated-packet ${getPacketClassForWire(c.class)}`);
+        packet.setAttribute('id', `packet_${c.from}_${c.to}`);
+        connectorsLayer.appendChild(packet);
+      });
+
+      // 3. Render Nodes
+      pipeline.nodes.forEach((n, idx) => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', `svg-node ${n.colorClass || ''} ${idx === 0 ? 'is-active' : ''}`);
+        g.setAttribute('id', `node_${n.id}`);
+        g.setAttribute('data-node-id', n.id);
+
+        // Card Rectangle
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', n.x);
+        rect.setAttribute('y', n.y);
+        rect.setAttribute('width', n.w);
+        rect.setAttribute('height', n.h);
+        rect.setAttribute('class', 'node-card');
+        g.appendChild(rect);
+
+        // Status pill indicator
+        const pill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        pill.setAttribute('x', n.x + 12);
+        pill.setAttribute('y', n.y + 12);
+        pill.setAttribute('width', 6);
+        pill.setAttribute('height', n.h - 24);
+        pill.setAttribute('rx', 3);
+        pill.setAttribute('fill', getPillFillForColor(n.colorClass));
+        g.appendChild(pill);
+
+        // Title text
+        const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        title.setAttribute('x', n.x + 28);
+        title.setAttribute('y', n.y + 30);
+        title.setAttribute('font-size', '13');
+        title.setAttribute('font-weight', '700');
+        title.setAttribute('fill', '#0f172a');
+        title.textContent = n.title;
+        g.appendChild(title);
+
+        // Subtitle text
+        const subtitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        subtitle.setAttribute('x', n.x + 28);
+        subtitle.setAttribute('y', n.y + 48);
+        subtitle.setAttribute('font-size', '11');
+        subtitle.setAttribute('font-weight', '600');
+        subtitle.setAttribute('fill', '#64748b');
+        subtitle.textContent = n.subtitle;
+        g.appendChild(subtitle);
+
+        // File text
+        const file = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        file.setAttribute('x', n.x + 28);
+        file.setAttribute('y', n.y + 66);
+        file.setAttribute('font-size', '9.5');
+        file.setAttribute('font-family', 'var(--font-mono)');
+        file.setAttribute('fill', '#94a3b8');
+        file.textContent = n.file.length > 32 ? n.file.slice(0, 30) + '...' : n.file;
+        g.appendChild(file);
+
+        // Node click listener
+        g.addEventListener('click', () => {
+          selectNode(n);
+        });
+
+        nodesLayer.appendChild(g);
+      });
+
+      // Update Inspector with initial node
+      if (pipeline.nodes.length > 0) {
+        selectNode(pipeline.nodes[0]);
+      }
+
+      updateStepCounter();
+    }
+
+    // ── Helper Math for Orthogonal Connectors ────────────────────────────────
+    function calculateConnectorPath(from, to) {
+      // Determine if horizontal or vertical flow
+      const fromCenterX = from.x + from.w / 2;
+      const fromCenterY = from.y + from.h / 2;
+      const toCenterX = to.x + to.w / 2;
+      const toCenterY = to.y + to.h / 2;
+
+      // Vertical flow within same subsystem
+      if (Math.abs(fromCenterX - toCenterX) < 60) {
+        const startX = fromCenterX;
+        const startY = from.y + from.h;
+        const endX = toCenterX;
+        const endY = to.y;
+        return `M ${startX} ${startY} L ${endX} ${endY}`;
+      }
+
+      // Horizontal flow across subsystems
+      const startX = from.x + from.w;
+      const startY = fromCenterY;
+      const endX = to.x;
+      const endY = toCenterY;
+      const midX = (startX + endX) / 2;
+
+      return `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`;
+    }
+
+    function getMarkerForClass(cls) {
+      if (!cls) return 'url(#arrow-default)';
+      if (cls.includes('is-emerald')) return 'url(#arrow-emerald)';
+      if (cls.includes('is-rose')) return 'url(#arrow-rose)';
+      if (cls.includes('is-amber')) return 'url(#arrow-amber)';
+      if (cls.includes('is-purple')) return 'url(#arrow-purple)';
+      if (cls.includes('is-cyan')) return 'url(#arrow-cyan)';
+      return 'url(#arrow-blue)';
+    }
+
+    function getPacketClassForWire(cls) {
+      if (!cls) return '';
+      if (cls.includes('is-emerald')) return 'is-emerald';
+      if (cls.includes('is-rose')) return 'is-rose';
+      if (cls.includes('is-purple')) return 'is-purple';
+      if (cls.includes('is-cyan')) return 'is-cyan';
+      return '';
+    }
+
+    function getPillFillForColor(colorClass) {
+      switch (colorClass) {
+        case 'is-emerald': return '#059669';
+        case 'is-amber': return '#d97706';
+        case 'is-purple': return '#7c3aed';
+        case 'is-rose': return '#e11d48';
+        case 'is-cyan': return '#0891b2';
+        default: return '#2563eb';
+      }
+    }
+
+    // ── Inspector & Selection ────────────────────────────────────────────────
+    function selectNode(node) {
+      // Highlight node in SVG
+      document.querySelectorAll('.svg-node').forEach(el => el.classList.remove('is-active'));
+      const nodeEl = document.getElementById(`node_${node.id}`);
+      if (nodeEl) nodeEl.classList.add('is-active');
+
+      // Populate Inspector
+      const insTag = document.getElementById('insTag');
+      insTag.textContent = node.tag || 'SYSTEM COMPONENT';
+      insTag.className = `inspector-tag ${node.tagClass || 'tag-blue'}`;
+
+      document.getElementById('insTitle').textContent = node.title;
+      document.getElementById('insFile').textContent = node.file;
+      document.getElementById('insDesc').textContent = node.desc;
+      document.getElementById('insCode').textContent = node.code;
+
+      const guaranteesList = document.getElementById('insGuarantees');
+      guaranteesList.innerHTML = '';
+      (node.guarantees || []).forEach(g => {
+        const li = document.createElement('li');
+        li.className = 'guarantee-item';
+        li.innerHTML = `<span class="guarantee-bullet"></span><span>${g}</span>`;
+        guaranteesList.appendChild(li);
+      });
+    }
+
+    // ── Animation Stepper & Controls ─────────────────────────────────────────
+    function stepTo(index) {
+      const pipeline = PIPELINES[currentPipelineKey];
+      if (index >= pipeline.nodes.length) {
+        index = 0;
+      }
+      currentStepIndex = index;
+      selectNode(pipeline.nodes[currentStepIndex]);
+      updateStepCounter();
+    }
+
+    function updateStepCounter() {
+      const pipeline = PIPELINES[currentPipelineKey];
+      document.getElementById('stepCounter').textContent = `Step ${currentStepIndex + 1} of ${pipeline.nodes.length}`;
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      updatePlayButtonUI();
+
+      if (isPlaying) {
+        playInterval = setInterval(() => {
+          stepTo(currentStepIndex + 1);
+        }, 2200);
+      } else {
+        clearInterval(playInterval);
+      }
+    }
+
+    function updatePlayButtonUI() {
+      const btn = document.getElementById('btnPlayFlow');
+      const text = document.getElementById('playText');
+      if (isPlaying) {
+        btn.classList.remove('btn-play');
+        btn.style.background = '#e11d48';
+        btn.style.color = '#ffffff';
+        btn.style.borderColor = '#e11d48';
+        text.textContent = 'Pause Trace';
+      } else {
+        btn.classList.add('btn-play');
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+        text.textContent = 'Play Step Trace';
+      }
+    }
+
+    // ── Search & Filter ──────────────────────────────────────────────────────
+    function handleSearch(term) {
+      const cleanTerm = term.toLowerCase().trim();
+      const pipeline = PIPELINES[currentPipelineKey];
+
+      pipeline.nodes.forEach(n => {
+        const el = document.getElementById(`node_${n.id}`);
+        if (!el) return;
+        const matches = !cleanTerm ||
+          n.title.toLowerCase().includes(cleanTerm) ||
+          n.subtitle.toLowerCase().includes(cleanTerm) ||
+          n.file.toLowerCase().includes(cleanTerm) ||
+          n.desc.toLowerCase().includes(cleanTerm);
+
+        el.style.opacity = matches ? '1' : '0.25';
+        el.style.filter = matches ? 'none' : 'grayscale(1)';
+      });
+    }
+
+    // ── Event Handlers Initializer ───────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      // Pipeline nav buttons
+      document.querySelectorAll('.pipeline-nav .nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.pipeline-nav .nav-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const pipelineKey = btn.getAttribute('data-pipeline');
+          renderPipeline(pipelineKey);
+        });
+      });
+
+      // Play / Pause
+      document.getElementById('btnPlayFlow').addEventListener('click', togglePlay);
+
+      // Next Step
+      document.getElementById('btnNextStep').addEventListener('click', () => {
+        stepTo(currentStepIndex + 1);
+      });
+
+      // Reset
+      document.getElementById('btnResetFlow').addEventListener('click', () => {
+        stepTo(0);
+      });
+
+      // Search
+      document.getElementById('nodeSearchInput').addEventListener('input', (e) => {
+        handleSearch(e.target.value);
+      });
+
+      // Initial Render
+      renderPipeline('master');
+    });
+  </script>
+</body>
+</html>

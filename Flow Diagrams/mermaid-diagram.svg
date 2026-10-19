@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 906.8169999999998 889.762" width="906.8169999999998" height="889.762" style="--bg:#FFFFFF;--fg:#3B3B3B;--line:#3B3B3B;--accent:#005FB8;--muted:#3B3B3BCC;--surface:#F8F8F8;--border:#3B3B3B;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<polyline class="edge" data-from="A" data-to="B" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="122.84850000000002,303 122.84850000000002,337.9000000000001 225.06925000000004,337.9000000000001 225.06925000000004,355.9000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="B" data-to="C" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="225.06925000000004,392.80000000000007 225.06925000000004,440.80000000000007" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C" data-to="D" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="225.06925000000004,494.6000000000001 225.06925,550.3810000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="D" data-to="E" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Normal Weather Browsing" points="202.59208333333333,662.7668333333335 202.59208333333333,713.4630000000001 150.60925,713.4630000000001 150.60924999999997,803.3125" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="D" data-to="F" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Discreet Menu -&gt; Unlock PIN" points="247.5464166666667,662.7668333333335 247.5464166666667,713.4630000000001 319.9039166666667,713.4630000000001 319.9039166666667,800.862 595.0728333333333,800.862 595.0728333333333,803.3125" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="F" data-to="G" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="660.9261666666666,803.3125 660.9261666666666,800.862 858.8169999999998,800.862 858.8169999999998,197.8 688.4428333333332,197.8 688.4428333333332,76.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="G" data-to="H" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="612.7094999999999,76.9 612.7094999999999,112.9 546.5390833333333,112.9 546.5390833333333,124.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="H" data-to="I" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Incorrect PIN" points="507.80791666666664,161.8 507.80791666666664,173.80000000000007 327.2900000000001,173.80000000000007 327.29,266.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I" data-to="B" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="327.29,319.90000000000003 327.29,337.9000000000001 225.06925000000004,337.9000000000001 225.06925000000004,355.9000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="H" data-to="J" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Correct PIN" points="585.2702499999999,161.8 585.2702499999999,197.8 672.6024999999998,197.8 672.6024999999998,266.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="J" data-to="K" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Yes" points="645.3088333333333,402.56833333333344 645.3088333333333,477.862 582.0887499999999,477.862 582.0887499999999,550.3810000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="J" data-to="L" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="No" points="699.8961666666665,402.5683333333333 699.8961666666665,477.862 763.1162499999999,477.862 763.1162499999999,631.062 716.7676666666665,631.062 716.7676666666665,643.062" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K" data-to="L" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="582.0887499999999,587.2810000000001 582.0887499999999,631.062 628.4373333333332,631.062 628.4373333333332,643.062" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="L" data-to="M" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="672.6024999999998,679.962 672.6024999999998,727.962" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="D" data-to="E" data-label="Normal Weather Browsing">
+  <rect x="80.60925" y="720.4630000000001" width="139.42000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="150.31925" y="735.613" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Normal Weather Browsing</text>
+</g>
+<g class="edge-label" data-from="D" data-to="F" data-label="Discreet Menu -&gt; Unlock PIN">
+  <rect x="244.4039166666667" y="720.4630000000001" width="150.706" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="319.7569166666667" y="735.613" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Discreet Menu -&gt; Unlock PIN</text>
+</g>
+<g class="edge-label" data-from="H" data-to="I" data-label="Incorrect PIN">
+  <rect x="286.7900000000001" y="180.80000000000007" width="80.02000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="326.80000000000007" y="195.95000000000007" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Incorrect PIN</text>
+</g>
+<g class="edge-label" data-from="H" data-to="J" data-label="Correct PIN">
+  <rect x="636.1024999999998" y="204.8" width="72.892" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="672.5484999999999" y="219.95000000000002" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Correct PIN</text>
+</g>
+<g class="edge-label" data-from="J" data-to="K" data-label="Yes">
+  <rect x="563.5887499999999" y="484.862" width="36.658" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="581.9177499999998" y="500.012" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Yes</text>
+</g>
+<g class="edge-label" data-from="J" data-to="L" data-label="No">
+  <rect x="747.6162499999999" y="484.862" width="30.718000000000004" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="762.97525" y="500.012" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">No</text>
+</g>
+<g class="node" data-id="A" data-label="User Opens Mehfooz" data-shape="stadium">
+  <rect x="40.000000000000014" y="266.1" width="165.697" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="122.84850000000002" y="284.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User Opens Mehfooz</text>
+</g>
+<g class="node" data-id="B" data-label="Weather Cover Interface" data-shape="rectangle">
+  <rect x="132.58775000000006" y="355.9000000000001" width="184.96299999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="225.06925000000004" y="374.3500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Weather Cover Interface</text>
+</g>
+<g class="node" data-id="C" data-label="Displays Real Weather Data
+(Temp, AQI, UV, Hourly Forecast)" data-shape="rectangle">
+  <rect x="108.50525000000006" y="440.80000000000007" width="233.12799999999996" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="225.06925000000004" y="467.70000000000005" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="225.06925000000004" dy="-3.9000000000000012">Displays Real Weather Data</tspan><tspan x="225.06925000000004" dy="16.900000000000002">(Temp, AQI, UV, Hourly Forecast)</tspan></text>
+</g>
+<g class="node" data-id="D" data-label="User Action" data-shape="diamond">
+  <polygon points="225.06925,550.3810000000001 292.50075000000004,617.8125000000001 225.06925,685.2440000000001 157.63775,617.8125000000001" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="225.06925" y="617.8125000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User Action</text>
+</g>
+<g class="node" data-id="E" data-label="Stays on Weather Screen" data-shape="rectangle">
+  <rect x="54.79325" y="803.3125" width="191.63199999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="150.60924999999997" y="821.7625" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Stays on Weather Screen</text>
+</g>
+<g class="node" data-id="F" data-label="Stealth PIN Modal Appears" data-shape="rectangle">
+  <rect x="529.2194999999999" y="803.3125" width="197.56" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="627.9994999999999" y="821.7625" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Stealth PIN Modal Appears</text>
+</g>
+<g class="node" data-id="G" data-label="User Enters Secret 4-6 Digit PIN" data-shape="rectangle">
+  <rect x="536.9761666666666" y="40" width="227.19999999999993" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="650.5761666666665" y="58.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User Enters Secret 4-6 Digit PIN</text>
+</g>
+<g class="node" data-id="H" data-label="Hash Check: SHA-256 via auth.ts" data-shape="rectangle">
+  <rect x="430.3455833333333" y="124.9" width="232.38699999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="546.5390833333333" y="143.35000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Hash Check: SHA-256 via auth.ts</text>
+</g>
+<g class="node" data-id="I" data-label="Subtle 'Invalid' message
+No sign of safety features" data-shape="rectangle">
+  <rect x="233.697" y="266.1" width="187.186" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="327.29" y="293" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="327.29" dy="-3.9000000000000012">Subtle &#39;Invalid&#39; message</tspan><tspan x="327.29" dy="16.900000000000002">No sign of safety features</tspan></text>
+</g>
+<g class="node" data-id="J" data-label="First Time User?" data-shape="diamond">
+  <polygon points="672.6024999999998,266.1 754.4834999999998,347.981 672.6024999999998,429.86199999999997 590.7214999999999,347.981" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="672.6024999999998" y="347.981" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">First Time User?</text>
+</g>
+<g class="node" data-id="K" data-label="Onboarding Modal: Setup Contacts, Home, Vault Key" data-shape="rectangle">
+  <rect x="411.06125" y="550.3810000000001" width="342.0549999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="582.0887499999999" y="568.8310000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Onboarding Modal: Setup Contacts, Home, Vault Key</text>
+</g>
+<g class="node" data-id="L" data-label="🛡️ Unlock Mehfooz Home Dashboard" data-shape="rectangle">
+  <rect x="540.1069999999999" y="643.062" width="264.991" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="672.6024999999998" y="661.5120000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">🛡️ Unlock Mehfooz Home Dashboard</text>
+</g>
+<g class="node" data-id="M" data-label="Access Core Pillars: Chat, Navigation, Check-In, Vault" data-shape="rectangle">
+  <rect x="496.3879999999999" y="727.962" width="352.42899999999986" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="672.6024999999998" y="746.412" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Access Core Pillars: Chat, Navigation, Check-In, Vault</text>
+</g>
+</svg>
